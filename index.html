@@ -1,0 +1,941 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Farm Limited — Growing Prosperity, Sustainably</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-deep: #1a3d2b;
+      --green-mid: #2e7d32;
+      --green-fresh: #4caf50;
+      --green-light: #a8d5a2;
+      --cream: #f5f0e8;
+      --gold: #c8a84b;
+      --white: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-mid: #4a5568;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(26,61,43,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200,168,75,0.2);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(245,240,232,0.8); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold); color: var(--green-deep);
+      padding: 0.6rem 1.5rem; border-radius: 2px;
+      font-weight: 600; font-size: 0.85rem;
+      text-decoration: none; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #dfc06a; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--green-deep) 0%, #2d5a3d 50%, #1a3d2b 100%);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding-top: 80px;
+    }
+    .hero-texture {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(76,175,80,0.08) 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(200,168,75,0.06) 0%, transparent 50%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(var(--green-light) 1px, transparent 1px),
+        linear-gradient(90deg, var(--green-light) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 0 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.4);
+      color: var(--gold); font-size: 0.75rem; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 900; line-height: 1.05;
+      color: var(--cream); margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero-title em { color: var(--gold); font-style: italic; }
+    .hero-desc {
+      color: rgba(245,240,232,0.7); font-size: 1.1rem;
+      line-height: 1.7; margin-bottom: 2.5rem; font-weight: 300;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--green-deep);
+      padding: 0.9rem 2rem; border-radius: 2px;
+      font-weight: 700; font-size: 0.9rem;
+      text-decoration: none; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: all 0.2s; display: inline-block;
+    }
+    .btn-primary:hover { background: #dfc06a; transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid rgba(245,240,232,0.4); color: var(--cream);
+      padding: 0.9rem 2rem; border-radius: 2px;
+      font-weight: 500; font-size: 0.9rem;
+      text-decoration: none; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: all 0.2s; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--cream); background: rgba(245,240,232,0.05); }
+    .hero-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1.5rem; border-radius: 4px;
+      backdrop-filter: blur(10px);
+    }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem; font-weight: 900;
+      color: var(--gold); line-height: 1;
+    }
+    .hero-stat-label {
+      color: rgba(245,240,232,0.6);
+      font-size: 0.8rem; letter-spacing: 0.05em;
+      text-transform: uppercase; margin-top: 0.4rem;
+    }
+    .hero-stat-desc {
+      color: rgba(245,240,232,0.5);
+      font-size: 0.78rem; margin-top: 0.3rem; line-height: 1.4;
+    }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 6rem 4rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block;
+      color: var(--green-mid); font-size: 0.75rem; letter-spacing: 0.15em;
+      text-transform: uppercase; font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900; line-height: 1.1;
+      color: var(--green-deep); margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .section-lead {
+      color: var(--text-mid); font-size: 1.05rem;
+      line-height: 1.7; max-width: 600px;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      align-items: center; margin-top: 4rem;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-frame {
+      background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+      border-radius: 4px; padding: 3px;
+    }
+    .about-img-inner {
+      background: linear-gradient(160deg, #c8e6c9 0%, #a5d6a7 50%, #81c784 100%);
+      border-radius: 3px; aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+    }
+    .about-badge {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      background: var(--green-deep); color: var(--cream);
+      padding: 1.2rem 1.5rem; border-radius: 4px;
+      text-align: center; border: 3px solid var(--gold);
+    }
+    .about-badge-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: var(--gold);
+    }
+    .about-badge-text { font-size: 0.75rem; opacity: 0.8; }
+    .pillars { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    .pillar {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.2rem; border: 1px solid #e8f5e9; border-radius: 4px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .pillar:hover { border-color: var(--green-light); box-shadow: 0 4px 20px rgba(46,125,50,0.08); }
+    .pillar-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #e8f5e9; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .pillar h4 { font-weight: 600; color: var(--green-deep); margin-bottom: 0.3rem; }
+    .pillar p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.5; }
+
+    /* ── MARKET ── */
+    #market {
+      background: var(--green-deep);
+      color: var(--cream);
+    }
+    #market .section-title { color: var(--cream); }
+    #market .section-lead { color: rgba(245,240,232,0.7); }
+    #market .section-tag { color: var(--gold); }
+    .market-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .market-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 2rem; border-radius: 4px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .market-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+    .market-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .market-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; margin-bottom: 0.8rem;
+      color: var(--gold);
+    }
+    .market-card p { font-size: 0.9rem; line-height: 1.6; opacity: 0.8; }
+
+    /* ── PRODUCTS ── */
+    #products { background: var(--cream); }
+    .products-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      margin-top: 3rem;
+    }
+    .product-card {
+      background: var(--white); border-radius: 4px;
+      overflow: hidden; box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+    .product-card-header {
+      height: 160px; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .product-card-header.green { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+    .product-card-header.teal { background: linear-gradient(135deg, #e0f2f1, #b2dfdb); }
+    .product-card-header.gold { background: linear-gradient(135deg, #fff8e1, #ffecb3); }
+    .product-card-body { padding: 1.5rem; }
+    .product-card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--green-deep); margin-bottom: 0.7rem;
+    }
+    .product-card-body p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
+
+    /* ── BUSINESS MODEL ── */
+    #model { background: var(--white); }
+    .model-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      margin-top: 3rem;
+    }
+    .model-card {
+      border-top: 3px solid var(--green-mid); padding: 2rem 0;
+    }
+    .model-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--green-deep); margin-bottom: 0.8rem;
+    }
+    .model-card p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
+    .value-prop {
+      margin-top: 3rem; padding: 2rem 2.5rem;
+      background: #e8f5e9; border-left: 4px solid var(--green-mid);
+      border-radius: 0 4px 4px 0;
+    }
+    .value-prop p { font-size: 1rem; color: var(--green-deep); line-height: 1.6; font-weight: 500; }
+
+    /* ── ROADMAP ── */
+    #roadmap { background: var(--cream); }
+    .roadmap-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      margin-top: 3rem; position: relative;
+    }
+    .roadmap-steps::before {
+      content: '';
+      position: absolute; top: 2rem; left: 12.5%; right: 12.5%;
+      height: 2px; background: linear-gradient(90deg, var(--green-mid), var(--gold));
+    }
+    .roadmap-step { text-align: center; padding: 0 1rem; }
+    .roadmap-dot {
+      width: 4rem; height: 4rem; border-radius: 50%;
+      background: var(--white); border: 3px solid var(--green-mid);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem; font-size: 1.4rem; position: relative; z-index: 1;
+    }
+    .roadmap-step:last-child .roadmap-dot { border-color: var(--gold); }
+    .roadmap-step h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--green-deep); margin-bottom: 0.5rem;
+    }
+    .roadmap-step p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.5; }
+    .roadmap-year {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── IMPACT ── */
+    #impact { background: var(--green-deep); color: var(--cream); }
+    #impact .section-title { color: var(--cream); }
+    #impact .section-lead { color: rgba(245,240,232,0.7); }
+    #impact .section-tag { color: var(--gold); }
+    .impact-metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      margin-top: 3rem;
+    }
+    .impact-metric { text-align: center; }
+    .donut-wrap {
+      position: relative; width: 140px; height: 140px; margin: 0 auto 1.2rem;
+    }
+    .donut-wrap svg { transform: rotate(-90deg); }
+    .donut-bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 10; }
+    .donut-fill {
+      fill: none; stroke: var(--gold); stroke-width: 10;
+      stroke-linecap: round; transition: stroke-dashoffset 1.5s ease;
+    }
+    .donut-label {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .donut-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 900; color: var(--gold); line-height: 1;
+    }
+    .impact-metric p { font-size: 0.85rem; opacity: 0.7; line-height: 1.4; }
+
+    /* ── FINANCIALS ── */
+    #financials { background: var(--white); }
+    .fin-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      margin-top: 3rem;
+    }
+    .fin-card {
+      background: var(--cream); border-radius: 4px; padding: 2.5rem 2rem;
+      text-align: center; border: 1px solid #e0e0e0;
+    }
+    .fin-card-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 900;
+      color: var(--green-deep); line-height: 1;
+    }
+    .fin-card-label {
+      font-weight: 700; color: var(--green-mid);
+      font-size: 0.9rem; letter-spacing: 0.05em;
+      text-transform: uppercase; margin: 0.5rem 0;
+    }
+    .fin-card-desc { font-size: 0.85rem; color: var(--text-mid); line-height: 1.5; }
+
+    /* ── CROPS ── */
+    #crops { background: var(--cream); }
+    .crops-grid {
+      display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem;
+    }
+    .crop-chip {
+      background: var(--white); border: 1px solid #e0e0e0;
+      padding: 0.8rem 1.5rem; border-radius: 50px;
+      font-weight: 500; color: var(--green-deep);
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.95rem; transition: all 0.2s; cursor: pointer;
+    }
+    .crop-chip:hover { background: var(--green-deep); color: var(--cream); border-color: var(--green-deep); }
+    .crop-chip span { font-size: 1.1rem; }
+
+    /* ── CTA ── */
+    #cta {
+      background: linear-gradient(135deg, var(--green-deep) 0%, #2d5a3d 100%);
+      text-align: center; padding: 8rem 4rem;
+    }
+    #cta .section-tag { color: var(--gold); }
+    #cta .section-title { color: var(--cream); margin: 0 auto 1rem; max-width: 700px; }
+    #cta .section-lead { color: rgba(245,240,232,0.7); margin: 0 auto 2.5rem; text-align: center; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0f2418; color: rgba(245,240,232,0.6);
+      padding: 3rem 4rem; display: flex;
+      justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--cream); font-weight: 700;
+    }
+    .footer-logo span { color: var(--gold); }
+    footer p { font-size: 0.85rem; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { color: rgba(245,240,232,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── CONTACT FORM ── */
+    #contact { background: var(--white); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem;
+      margin-top: 3rem; align-items: start;
+    }
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--green-deep); margin-bottom: 1rem;
+    }
+    .contact-info p { color: var(--text-mid); line-height: 1.7; margin-bottom: 1.5rem; }
+    .contact-detail {
+      display: flex; gap: 0.8rem; align-items: center;
+      margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--text-mid);
+    }
+    .contact-detail span:first-child { font-size: 1.1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--green-deep); margin-bottom: 0.4rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.8rem 1rem;
+      border: 1px solid #e0e0e0; border-radius: 3px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      color: var(--text-dark); background: var(--cream);
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--green-mid);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-submit {
+      width: 100%; background: var(--green-deep); color: var(--cream);
+      padding: 1rem; border: none; border-radius: 3px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      font-weight: 600; cursor: pointer; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: background 0.2s;
+    }
+    .form-submit:hover { background: var(--green-mid); }
+    .form-success {
+      display: none; background: #e8f5e9; border: 1px solid var(--green-mid);
+      border-radius: 3px; padding: 1rem; text-align: center;
+      color: var(--green-deep); font-weight: 500; margin-top: 1rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .hero-content, .about-grid, .contact-grid {
+        grid-template-columns: 1fr; gap: 3rem;
+      }
+      #hero { padding-top: 100px; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .market-cards, .products-grid, .model-grid,
+      .fin-cards, .impact-metrics { grid-template-columns: 1fr; }
+      .roadmap-steps { grid-template-columns: 1fr 1fr; }
+      .roadmap-steps::before { display: none; }
+      footer { flex-direction: column; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Eco<span>-Farm</span> Limited</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#market">Market</a></li>
+      <li><a href="#impact">Impact</a></li>
+      <li><a href="#financials">Financials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Invest Now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-texture"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div>
+        <div class="hero-tag">Sierra Leone &amp; West Africa</div>
+        <h1 class="hero-title">
+          Growing <em>Prosperity,</em> Sustainably
+        </h1>
+        <p class="hero-desc">
+          Eco-Farm Limited is a pioneering agribusiness transforming agriculture in Sierra Leone and West Africa — integrating farming, technology, and capital to empower farmers, attract investors, and strengthen food security.
+        </p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">Partner With Us</a>
+          <a href="#about" class="btn-outline">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">10–20%</div>
+          <div class="hero-stat-label">Target ROI</div>
+          <div class="hero-stat-desc">Per crop cycle for investors</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">$500K</div>
+          <div class="hero-stat-label">Seed Round</div>
+          <div class="hero-stat-desc">Initial capital for pilot &amp; platform</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">Year 3</div>
+          <div class="hero-stat-label">Break-Even</div>
+          <div class="hero-stat-desc">Target financial break-even</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">60%+</div>
+          <div class="hero-stat-label">GDP Share</div>
+          <div class="hero-stat-desc">Agriculture in Sierra Leone</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-visual fade-up">
+          <div class="about-img-frame">
+            <div class="about-img-inner">🌾</div>
+          </div>
+          <div class="about-badge">
+            <div class="about-badge-num">5</div>
+            <div class="about-badge-text">Year Vision</div>
+          </div>
+        </div>
+        <div class="fade-up">
+          <div class="section-tag">Who We Are</div>
+          <h2 class="section-title">Both Producer<br>and Platform</h2>
+          <p class="section-lead">Eco-Farm Limited is a Private Limited Company registered in Sierra Leone, with expansion plans across West Africa. We uniquely blend food production with agritech innovation and investor-backed growth — positioning ourselves as both a producer and a platform.</p>
+          <div class="pillars">
+            <div class="pillar">
+              <div class="pillar-icon">🌱</div>
+              <div>
+                <h4>Food Production</h4>
+                <p>Large-scale farming of staple crops and high-value produce, with processing and distribution included.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon">💻</div>
+              <div>
+                <h4>Agritech</h4>
+                <p>Smart farming tools, yield-tracking apps, logistics platforms, and digital dashboards for investors and farmers.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon">📈</div>
+              <div>
+                <h4>Agri-Investment</h4>
+                <p>Structured investment opportunities where individuals and institutions fund agricultural projects and receive 10–20% ROI.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKET -->
+  <section id="market">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-tag">Market Analysis</div>
+        <h2 class="section-title">A Timely Opportunity<br>in West Africa</h2>
+        <p class="section-lead">Agriculture contributes over 60% to Sierra Leone's GDP and employs the majority of the population — yet the sector faces low productivity, limited capital access, and outdated practices. The opportunity is enormous.</p>
+      </div>
+      <div class="market-cards">
+        <div class="market-card fade-up">
+          <div class="market-card-icon">📈</div>
+          <h3>Market Opportunity</h3>
+          <p>Rising demand for food security, increasing global interest in Africa impact investment, and untapped agritech adoption potential across Sierra Leone and West Africa.</p>
+        </div>
+        <div class="market-card fade-up">
+          <div class="market-card-icon">⚠️</div>
+          <h3>Industry Challenges</h3>
+          <p>Traditional farms and cooperatives dominate but lack integrated technology and investment. NGO-funded projects exist but often lack scalability and commercial viability.</p>
+        </div>
+        <div class="market-card fade-up">
+          <div class="market-card-icon">🛡️</div>
+          <h3>Ecofarm's Edge</h3>
+          <p>A unified model combining food production, technology, and investor returns — the only platform in the region to integrate all three at scale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-tag">Products &amp; Services</div>
+        <h2 class="section-title">Three Complementary<br>Product Lines</h2>
+        <p class="section-lead">Three integrated product lines that together create diversified revenue, measurable impact, and a resilient agribusiness ecosystem.</p>
+      </div>
+      <div class="products-grid">
+        <div class="product-card fade-up">
+          <div class="product-card-header green">🌾</div>
+          <div class="product-card-body">
+            <h3>Food Production</h3>
+            <p>Large-scale farming of staple crops (rice, cassava, maize) and high-value produce (vegetables, fruits), with onsite processing and distribution to local and export markets.</p>
+          </div>
+        </div>
+        <div class="product-card fade-up">
+          <div class="product-card-header teal">📱</div>
+          <div class="product-card-body">
+            <h3>Agritech Solutions</h3>
+            <p>Smart farming tools, yield-tracking apps, logistics platforms, and digital investor dashboards that bring transparency and data-driven decision-making to every farm.</p>
+          </div>
+        </div>
+        <div class="product-card fade-up">
+          <div class="product-card-header gold">💰</div>
+          <div class="product-card-body">
+            <h3>Agri-Investment Packages</h3>
+            <p>Structured opportunities for individuals and institutions to fund agricultural projects and receive 10–20% ROI depending on crop cycles and market conditions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CROPS -->
+  <section id="crops">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-tag">What We Grow</div>
+        <h2 class="section-title">Our Crop Portfolio</h2>
+        <p class="section-lead">A diverse mix of staple and high-value crops designed for food security and export potential.</p>
+      </div>
+      <div class="crops-grid fade-up">
+        <div class="crop-chip"><span>🌾</span> Rice</div>
+        <div class="crop-chip"><span>🍠</span> Cassava</div>
+        <div class="crop-chip"><span>🌽</span> Maize</div>
+        <div class="crop-chip"><span>🥜</span> Groundnuts</div>
+        <div class="crop-chip"><span>🥦</span> Vegetables</div>
+        <div class="crop-chip"><span>🍫</span> Cocoa &amp; Oil Palm</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS MODEL -->
+  <section id="model">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-tag">Business Model</div>
+        <h2 class="section-title">Multiple Coherent<br>Revenue Streams</h2>
+        <p class="section-lead">Three revenue streams designed to de-risk the enterprise and deliver value to farmers, investors, and communities simultaneously.</p>
+      </div>
+      <div class="model-grid">
+        <div class="model-card fade-up">
+          <h3>Direct Produce Sales</h3>
+          <p>Revenue from direct sales of produce to local and export markets, creating a reliable baseline income stream from core farming operations.</p>
+        </div>
+        <div class="model-card fade-up">
+          <h3>Agritech Subscriptions</h3>
+          <p>Subscription and licensing fees for smart farming tools and digital platforms — a scalable, recurring revenue stream as adoption grows across the region.</p>
+        </div>
+        <div class="model-card fade-up">
+          <h3>Investor Profit-Sharing</h3>
+          <p>Investor-backed farm projects with transparent profit-sharing, offering 10–20% ROI per cycle while contributing measurable social and food security impact.</p>
+        </div>
+      </div>
+      <div class="value-prop fade-up">
+        <p>💡 <strong>Triple value proposition:</strong> Farmers gain access to capital, technology, and markets. Investors gain transparent, measurable returns. Communities benefit from job creation and sustainable practices.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-tag">Operations &amp; Roadmap</div>
+        <h2 class="section-title">A Phased Path<br>to Regional Scale</h2>
+        <p class="section-lead">A phased approach that reduces execution risk while building toward a fully scaled regional agribusiness platform.</p>
+      </div>
+      <div class="roadmap-steps fade-up">
+        <div class="roadmap-step">
+          <div class="roadmap-dot">🌱</div>
+          <div class="roadmap-year">Pilot Phase</div>
+          <h4>Launch</h4>
+          <p>Launch a pilot farm in Sierra Leone with integrated agritech and initial investor backing.</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot">🚜</div>
+          <div class="roadmap-year">Expansion Phase</div>
+          <h4>Scale</h4>
+          <p>Scale food production regionally, introduce agritech solutions, and build distribution networks.</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot">💻</div>
+          <div class="roadmap-year">Platform Phase</div>
+          <h4>Invest</h4>
+          <p>Launch a digital investment platform where investors track projects, returns, and impact in real time.</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot">🌍</div>
+          <div class="roadmap-year">Year 5</div>
+          <h4>Maturity</h4>
+          <p>Regional operations live, export markets active, and West Africa's leading agribusiness platform established.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section id="impact">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-tag">Impact &amp; Sustainability</div>
+        <h2 class="section-title">Measuring What Matters</h2>
+        <p class="section-lead">Ecofarm measures success beyond financial returns — tracking jobs created, farmer incomes increased, food imports reduced, and environmental footprint cut through eco-friendly and organic farming methods.</p>
+      </div>
+      <div class="impact-metrics fade-up">
+        <div class="impact-metric">
+          <div class="donut-wrap">
+            <svg width="140" height="140" viewBox="0 0 140 140">
+              <circle class="donut-bg" cx="70" cy="70" r="55"/>
+              <circle class="donut-fill" cx="70" cy="70" r="55" stroke-dasharray="345.6" stroke-dashoffset="242" id="d1"/>
+            </svg>
+            <div class="donut-label">
+              <div class="donut-num">30%</div>
+            </div>
+          </div>
+          <p>Projected increase in farmer income within first 2 years</p>
+        </div>
+        <div class="impact-metric">
+          <div class="donut-wrap">
+            <svg width="140" height="140" viewBox="0 0 140 140">
+              <circle class="donut-bg" cx="70" cy="70" r="55"/>
+              <circle class="donut-fill" cx="70" cy="70" r="55" stroke-dasharray="345.6" stroke-dashoffset="173" id="d2"/>
+            </svg>
+            <div class="donut-label">
+              <div class="donut-num">50%</div>
+            </div>
+          </div>
+          <p>Reduction in post-harvest losses through improved logistics</p>
+        </div>
+        <div class="impact-metric">
+          <div class="donut-wrap">
+            <svg width="140" height="140" viewBox="0 0 140 140">
+              <circle class="donut-bg" cx="70" cy="70" r="55"/>
+              <circle class="donut-fill" cx="70" cy="70" r="55" stroke-dasharray="345.6" stroke-dashoffset="69" id="d3"/>
+            </svg>
+            <div class="donut-label">
+              <div class="donut-num">80%</div>
+            </div>
+          </div>
+          <p>Target of sustainable practice adoption across partner farms</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCIALS -->
+  <section id="financials">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-tag">Financial Outline</div>
+        <h2 class="section-title">Built for Resilient Returns</h2>
+        <p class="section-lead">Leadership combines agricultural, tech, and financial expertise. CEO Henrison (Founder) leads strategy alongside Agritech, Operations, and Investment leads, supported by an advisory board of sector experts.</p>
+      </div>
+      <div class="fin-cards fade-up">
+        <div class="fin-card">
+          <div class="fin-card-num">Year 1</div>
+          <div class="fin-card-label">Pilot Revenue</div>
+          <div class="fin-card-desc">Pilot farm launch with initial investor pool. Startup costs cover land, equipment, agritech platform development, and logistics infrastructure.</div>
+        </div>
+        <div class="fin-card">
+          <div class="fin-card-num">10–20%</div>
+          <div class="fin-card-label">Target ROI</div>
+          <div class="fin-card-desc">Projected returns for investors per crop cycle, depending on crop type and market conditions, through diversified revenue streams.</div>
+        </div>
+        <div class="fin-card">
+          <div class="fin-card-num">Year 2–3</div>
+          <div class="fin-card-label">Break-Even</div>
+          <div class="fin-card-desc">Break-even achieved through dual revenue streams. Regional expansion and active export markets targeted by Year 5.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div class="fade-up">
+          <div class="section-tag">Get In Touch</div>
+          <h2 class="section-title">Join Us in<br>Cultivating Prosperity</h2>
+          <p style="color: var(--text-mid); line-height: 1.7; margin-bottom: 1.5rem;">
+            We invite impact investors and strategic partners to join Eco-Farm Limited. Our next steps: secure seed capital, finalise the pilot site, onboard strategic partners, and launch the digital investor platform.
+          </p>
+          <div class="contact-detail"><span>📍</span><span>Sierra Leone — Regional expansion across West Africa</span></div>
+          <div class="contact-detail"><span>👤</span><span>CEO: Henrison (Founder)</span></div>
+          <div class="contact-detail"><span>🎯</span><span>Targeting impact investors, agribusiness partners &amp; farmers</span></div>
+          <div class="contact-detail"><span>💼</span><span>Private Limited Company — Transparent investor reporting</span></div>
+        </div>
+        <div class="fade-up">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="John" id="fname">
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Smith" id="lname">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="john@example.com" id="email">
+          </div>
+          <div class="form-group">
+            <label>I am a...</label>
+            <select id="role">
+              <option value="">Select your role</option>
+              <option>Impact Investor</option>
+              <option>Strategic Partner</option>
+              <option>Farmer / Cooperative</option>
+              <option>Government / NGO</option>
+              <option>Media / Press</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us about your interest in Eco-Farm Limited..." id="message"></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">Send Message →</button>
+          <div class="form-success" id="form-success">
+            ✅ Thank you! We'll be in touch shortly.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="section-inner" style="text-align:center;">
+      <div class="section-tag fade-up">Ready to Invest?</div>
+      <h2 class="section-title fade-up" style="margin: 0 auto 1rem;">Growing Prosperity,<br><em style="font-style:italic; color: var(--gold);">Sustainably</em></h2>
+      <p class="section-lead fade-up" style="margin: 0 auto 2.5rem; text-align:center;">Transparent returns. Verified impact. West Africa's future of agriculture starts here.</p>
+      <div class="cta-btns fade-up">
+        <a href="#contact" class="btn-primary">Partner With Us</a>
+        <a href="#financials" class="btn-outline">View Financials</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Eco<span>-Farm</span> Limited</div>
+    <p>© 2025 Eco-Farm Limited, Sierra Leone. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#impact">Impact</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'var(--gold)' : '';
+      });
+    });
+
+    // Contact form
+    function submitForm() {
+      const fname = document.getElementById('fname').value;
+      const email = document.getElementById('email').value;
+      if (!fname || !email) {
+        alert('Please fill in your name and email.');
+        return;
+      }
+      document.getElementById('form-success').style.display = 'block';
+      document.querySelector('.form-submit').disabled = true;
+      document.querySelector('.form-submit').textContent = 'Sent ✓';
+    }
+
+    // Crop chip interaction
+    document.querySelectorAll('.crop-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.crop-chip').forEach(c => c.style.background = '');
+        chip.style.background = 'var(--green-deep)';
+        chip.style.color = 'var(--cream)';
+        chip.style.borderColor = 'var(--green-deep)';
+      });
+    });
+  </script>
+</body>
+</html>
