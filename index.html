@@ -424,7 +424,11 @@
       display: flex; gap: 0.8rem; align-items: center;
       margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--text-mid);
     }
-    .contact-detail span:first-child { font-size: 1.1rem; }
+    .contact-detail span:first-child {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green-mid); flex-shrink: 0;
+      font-size: 0; display: inline-block;
+    }
     .form-group { margin-bottom: 1.2rem; }
     .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--green-deep); margin-bottom: 0.4rem; }
     .form-group input, .form-group select, .form-group textarea {
@@ -460,6 +464,259 @@
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+    /* ── FARMER DASHBOARD ── */
+    #dashboard { background: var(--cream); }
+
+    /* Login Gate */
+    .dash-gate {
+      max-width: 460px; margin: 3rem auto 0;
+      background: var(--white); border-radius: 6px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .dash-gate-header {
+      background: var(--green-deep); padding: 2rem 2.5rem;
+      text-align: center;
+    }
+    .dash-gate-header h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--cream); font-size: 1.4rem; margin-bottom: 0.4rem;
+    }
+    .dash-gate-header p { color: rgba(245,240,232,0.6); font-size: 0.85rem; }
+    .dash-gate-body { padding: 2rem 2.5rem; }
+    .dash-gate-body .form-group label { color: var(--green-deep); font-weight: 600; }
+    .dash-login-btn {
+      width: 100%; background: var(--green-deep); color: var(--cream);
+      padding: 0.9rem; border: none; border-radius: 3px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      font-weight: 600; cursor: pointer; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: background 0.2s; margin-top: 0.5rem;
+    }
+    .dash-login-btn:hover { background: var(--green-mid); }
+    .dash-demo-hint {
+      text-align: center; margin-top: 1rem;
+      font-size: 0.8rem; color: var(--text-mid);
+    }
+    .dash-demo-hint strong { color: var(--green-mid); }
+
+    /* Main Dashboard */
+    .dash-main { display: none; }
+    .dash-main.active { display: block; }
+
+    .dash-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--green-deep); border-radius: 6px;
+      padding: 1.2rem 2rem; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .dash-farmer-info { display: flex; align-items: center; gap: 1rem; }
+    .dash-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--gold); display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; font-weight: 700; color: var(--green-deep);
+      font-family: 'Playfair Display', serif;
+    }
+    .dash-farmer-name {
+      font-family: 'Playfair Display', serif;
+      color: var(--cream); font-size: 1.1rem; font-weight: 700;
+    }
+    .dash-farmer-id { color: rgba(245,240,232,0.5); font-size: 0.78rem; }
+    .dash-topbar-right { display: flex; align-items: center; gap: 1rem; }
+    .dash-badge {
+      background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.4);
+      color: var(--gold); font-size: 0.75rem; padding: 0.3rem 0.8rem;
+      border-radius: 50px; font-weight: 600;
+    }
+    .dash-logout {
+      background: transparent; border: 1px solid rgba(245,240,232,0.3);
+      color: rgba(245,240,232,0.7); padding: 0.4rem 1rem;
+      border-radius: 3px; cursor: pointer; font-size: 0.8rem;
+      font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+    }
+    .dash-logout:hover { border-color: var(--cream); color: var(--cream); }
+
+    /* Stat Cards */
+    .dash-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .dash-stat-card {
+      background: var(--white); border-radius: 5px; padding: 1.4rem 1.5rem;
+      border-left: 3px solid var(--green-mid);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .dash-stat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+    .dash-stat-card.gold { border-left-color: var(--gold); }
+    .dash-stat-card.blue { border-left-color: #4a90d9; }
+    .dash-stat-card.orange { border-left-color: #e07b39; }
+    .dash-stat-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+    .dash-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 900; color: var(--green-deep); line-height: 1;
+    }
+    .dash-stat-label { font-size: 0.78rem; color: var(--text-mid); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .dash-stat-change { font-size: 0.78rem; margin-top: 0.4rem; font-weight: 600; }
+    .dash-stat-change.up { color: #2e7d32; }
+    .dash-stat-change.down { color: #c62828; }
+
+    /* Dashboard Grid */
+    .dash-grid {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .dash-card {
+      background: var(--white); border-radius: 5px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05); overflow: hidden;
+    }
+    .dash-card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 1.5rem; border-bottom: 1px solid #f0f0f0;
+    }
+    .dash-card-header h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--green-deep);
+    }
+    .dash-card-body { padding: 1.5rem; }
+
+    /* Crop Selector */
+    .crop-selector { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.2rem; }
+    .crop-btn {
+      padding: 0.5rem 1rem; border-radius: 50px; border: 1px solid #e0e0e0;
+      background: var(--cream); color: var(--text-mid);
+      font-size: 0.82rem; font-weight: 500; cursor: pointer;
+      transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+    }
+    .crop-btn.active, .crop-btn:hover {
+      background: var(--green-deep); color: var(--cream); border-color: var(--green-deep);
+    }
+
+    /* Progress Bars */
+    .crop-progress-item { margin-bottom: 1rem; }
+    .crop-progress-top {
+      display: flex; justify-content: space-between;
+      font-size: 0.82rem; margin-bottom: 0.4rem;
+    }
+    .crop-progress-top span:first-child { font-weight: 600; color: var(--green-deep); }
+    .crop-progress-top span:last-child { color: var(--text-mid); }
+    .progress-bar-bg {
+      background: #f0f0f0; border-radius: 50px; height: 8px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 50px;
+      background: linear-gradient(90deg, var(--green-mid), var(--green-fresh));
+      transition: width 1s ease;
+    }
+    .progress-bar-fill.gold { background: linear-gradient(90deg, var(--gold), #dfc06a); }
+    .progress-bar-fill.blue { background: linear-gradient(90deg, #4a90d9, #7ab3e8); }
+
+    /* Activity Feed */
+    .activity-feed { display: flex; flex-direction: column; gap: 0.8rem; }
+    .activity-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding-bottom: 0.8rem; border-bottom: 1px solid #f5f5f5;
+    }
+    .activity-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .activity-dot {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+    }
+    .activity-dot.green { background: #e8f5e9; }
+    .activity-dot.gold { background: #fff8e1; }
+    .activity-dot.blue { background: #e3f2fd; }
+    .activity-dot.orange { background: #fff3e0; }
+    .activity-text { font-size: 0.85rem; color: var(--text-dark); line-height: 1.4; }
+    .activity-time { font-size: 0.75rem; color: var(--text-mid); margin-top: 0.2rem; }
+
+    /* Schedule Table */
+    .schedule-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .schedule-table th {
+      text-align: left; padding: 0.6rem 0.8rem;
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text-mid); background: #fafafa; font-weight: 600;
+    }
+    .schedule-table td { padding: 0.8rem; border-top: 1px solid #f5f5f5; vertical-align: middle; }
+    .schedule-table tr:hover td { background: #fafafa; }
+    .status-pill {
+      display: inline-block; padding: 0.2rem 0.7rem; border-radius: 50px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+    }
+    .status-pill.active { background: #e8f5e9; color: var(--green-mid); }
+    .status-pill.pending { background: #fff8e1; color: #b8860b; }
+    .status-pill.done { background: #e3f2fd; color: #1565c0; }
+
+    /* Weather Widget */
+    .weather-widget {
+      background: linear-gradient(135deg, var(--green-deep), #2d5a3d);
+      border-radius: 5px; padding: 1.5rem; color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .weather-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .weather-temp {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1;
+    }
+    .weather-desc { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; }
+    .weather-location { font-size: 0.75rem; opacity: 0.5; }
+    .weather-icon { font-size: 3rem; }
+    .weather-details {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem; margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .weather-detail { text-align: center; }
+    .weather-detail-val { font-weight: 600; font-size: 0.9rem; color: var(--gold); }
+    .weather-detail-key { font-size: 0.7rem; opacity: 0.5; margin-top: 0.1rem; }
+
+    /* Alerts */
+    .dash-alerts { display: flex; flex-direction: column; gap: 0.6rem; }
+    .dash-alert {
+      display: flex; gap: 0.8rem; align-items: flex-start;
+      padding: 0.8rem 1rem; border-radius: 4px; font-size: 0.83rem;
+    }
+    .dash-alert.warn { background: #fff8e1; border-left: 3px solid var(--gold); }
+    .dash-alert.info { background: #e8f5e9; border-left: 3px solid var(--green-mid); }
+    .dash-alert.tip { background: #e3f2fd; border-left: 3px solid #4a90d9; }
+    .dash-alert strong { display: block; margin-bottom: 0.2rem; }
+
+    /* Submit crop log form */
+    .crop-log-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .crop-log-form .form-group { margin-bottom: 0; }
+    .crop-log-form .form-group label { font-size: 0.78rem; color: var(--green-deep); font-weight: 600; }
+    .crop-log-form .form-group input,
+    .crop-log-form .form-group select {
+      padding: 0.6rem 0.8rem; font-size: 0.85rem; background: var(--cream);
+      border: 1px solid #e0e0e0; border-radius: 3px;
+      font-family: 'DM Sans', sans-serif; width: 100%;
+    }
+    .crop-log-form .form-group input:focus,
+    .crop-log-form .form-group select:focus { outline: none; border-color: var(--green-mid); }
+    .crop-log-submit {
+      grid-column: span 2; background: var(--green-deep); color: var(--cream);
+      border: none; padding: 0.7rem; border-radius: 3px; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em; transition: background 0.2s;
+    }
+    .crop-log-submit:hover { background: var(--green-mid); }
+    .log-success {
+      grid-column: span 2; background: #e8f5e9; border: 1px solid var(--green-mid);
+      border-radius: 3px; padding: 0.7rem; text-align: center;
+      color: var(--green-deep); font-size: 0.85rem; font-weight: 500; display: none;
+    }
+
+    /* Tab bar */
+    .dash-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .dash-tab {
+      padding: 0.6rem 1.3rem; border-radius: 3px; border: 1px solid #e0e0e0;
+      background: var(--white); color: var(--text-mid); cursor: pointer;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .dash-tab.active { background: var(--green-deep); color: var(--cream); border-color: var(--green-deep); }
+    .dash-tab:hover:not(.active) { border-color: var(--green-mid); color: var(--green-mid); }
+    .dash-panel { display: none; }
+    .dash-panel.active { display: block; }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
@@ -475,7 +732,468 @@
       .roadmap-steps::before { display: none; }
       footer { flex-direction: column; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
+      .dash-stats { grid-template-columns: 1fr 1fr; }
+      .dash-grid { grid-template-columns: 1fr; }
+      .crop-log-form { grid-template-columns: 1fr; }
+      .crop-log-submit { grid-column: span 1; }
+      .log-success { grid-column: span 1; }
     }
+
+    /* ════════════════════════════════════════════
+       FARM SHOP E-COMMERCE
+    ════════════════════════════════════════════ */
+    #shop { background: var(--white); }
+
+    /* Filter bar */
+    .shop-filters {
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem; align-items: center;
+    }
+    .shop-filter-btn {
+      padding: 0.5rem 1.2rem; border-radius: 2px;
+      border: 1px solid #e0ddd5; background: var(--cream);
+      color: var(--text-mid); font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem; font-weight: 500; cursor: pointer;
+      transition: all 0.2s; letter-spacing: 0.04em;
+    }
+    .shop-filter-btn.active,
+    .shop-filter-btn:hover {
+      background: var(--green-deep); color: var(--cream);
+      border-color: var(--green-deep);
+    }
+    .shop-search {
+      margin-left: auto; position: relative;
+    }
+    .shop-search input {
+      padding: 0.5rem 1rem 0.5rem 2.2rem; border: 1px solid #e0ddd5;
+      border-radius: 2px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; background: var(--cream); color: var(--text-dark);
+      width: 200px; transition: border-color 0.2s;
+    }
+    .shop-search input:focus { outline: none; border-color: var(--green-mid); }
+    .shop-search svg {
+      position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%);
+      width: 14px; height: 14px; stroke: var(--text-mid);
+    }
+
+    /* Product grid */
+    .shop-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-bottom: 3rem;
+    }
+    .product-card {
+      background: var(--cream); border-radius: 4px;
+      border: 1px solid #e8e4da; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+    .product-img {
+      height: 180px; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .product-img-inner {
+      width: 100%; height: 100%; display: flex; align-items: center;
+      justify-content: center; font-size: 4rem;
+    }
+    .product-img.rice    { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+    .product-img.cassava { background: linear-gradient(135deg, #fff8e1, #ffe082); }
+    .product-img.maize   { background: linear-gradient(135deg, #fff3e0, #ffcc80); }
+    .product-img.veg     { background: linear-gradient(135deg, #e8f5e9, #a5d6a7); }
+    .product-img.fruit   { background: linear-gradient(135deg, #fce4ec, #f48fb1); }
+    .product-img.oil     { background: linear-gradient(135deg, #f3e5f5, #ce93d8); }
+    .product-badge {
+      position: absolute; top: 0.8rem; left: 0.8rem;
+      background: var(--green-deep); color: var(--cream);
+      font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.6rem;
+      border-radius: 2px; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .product-badge.organic { background: var(--green-mid); }
+    .product-badge.seasonal { background: var(--gold); color: var(--green-deep); }
+    .product-badge.limited { background: #c62828; }
+    .product-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+    .product-farmer {
+      font-size: 0.7rem; color: var(--green-mid); font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem;
+    }
+    .product-name {
+      font-family: 'Playfair Display', serif; font-size: 1.05rem;
+      font-weight: 700; color: var(--green-deep); margin-bottom: 0.3rem; line-height: 1.2;
+    }
+    .product-desc { font-size: 0.78rem; color: var(--text-mid); line-height: 1.5; flex: 1; }
+    .product-meta {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.8rem 0;
+    }
+    .product-tag {
+      font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.55rem;
+      border-radius: 50px; background: var(--white); color: var(--text-mid);
+      border: 1px solid #ddd; letter-spacing: 0.04em;
+    }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.2rem; border-top: 1px solid #e0ddd5; background: var(--white);
+    }
+    .product-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 900; color: var(--green-deep);
+    }
+    .product-price span { font-size: 0.75rem; color: var(--text-mid); font-family: 'DM Sans', sans-serif; font-weight: 400; }
+    .add-to-cart {
+      background: var(--green-deep); color: var(--cream);
+      border: none; padding: 0.55rem 1.1rem; border-radius: 2px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; letter-spacing: 0.06em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .add-to-cart:hover { background: var(--green-mid); }
+    .add-to-cart.added { background: var(--gold); color: var(--green-deep); }
+
+    /* Cart sidebar */
+    .cart-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4); z-index: 300;
+    }
+    .cart-overlay.open { display: block; }
+    .cart-drawer {
+      position: fixed; right: 0; top: 0; bottom: 0; width: 380px;
+      background: var(--white); z-index: 301; display: flex; flex-direction: column;
+      box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+      transform: translateX(100%); transition: transform 0.3s ease;
+    }
+    .cart-drawer.open { transform: translateX(0); }
+    .cart-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem; border-bottom: 1px solid #eee; background: var(--green-deep);
+    }
+    .cart-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); }
+    .cart-count-badge {
+      background: var(--gold); color: var(--green-deep);
+      font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem;
+      border-radius: 50px;
+    }
+    .cart-close {
+      background: none; border: none; color: var(--cream);
+      font-size: 1.4rem; cursor: pointer; padding: 0 0.3rem; line-height: 1;
+    }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
+    .cart-empty {
+      text-align: center; padding: 3rem 1rem; color: var(--text-mid);
+      font-size: 0.9rem;
+    }
+    .cart-item {
+      display: flex; gap: 0.8rem; align-items: flex-start;
+      padding: 0.9rem 0; border-bottom: 1px solid #f5f5f5;
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item-icon {
+      width: 44px; height: 44px; border-radius: 3px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-size: 0.85rem; font-weight: 600; color: var(--green-deep); }
+    .cart-item-farmer { font-size: 0.7rem; color: var(--text-mid); }
+    .cart-item-qty {
+      display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem;
+    }
+    .qty-btn {
+      width: 22px; height: 22px; border-radius: 2px; border: 1px solid #ddd;
+      background: var(--cream); cursor: pointer; font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Sans', sans-serif; transition: all 0.15s;
+    }
+    .qty-btn:hover { border-color: var(--green-mid); color: var(--green-mid); }
+    .qty-num { font-size: 0.82rem; font-weight: 600; color: var(--text-dark); min-width: 16px; text-align: center; }
+    .cart-item-price { font-size: 0.85rem; font-weight: 700; color: var(--green-deep); white-space: nowrap; }
+    .cart-item-remove { background: none; border: none; color: #ccc; cursor: pointer; font-size: 1rem; padding: 0 0.2rem; transition: color 0.15s; }
+    .cart-item-remove:hover { color: #c62828; }
+    .cart-footer { padding: 1.2rem; border-top: 1px solid #eee; }
+    .cart-subtotal {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1rem; font-size: 0.9rem;
+    }
+    .cart-subtotal-label { color: var(--text-mid); }
+    .cart-subtotal-val { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; color: var(--green-deep); }
+    .checkout-btn {
+      width: 100%; background: var(--green-deep); color: var(--cream);
+      border: none; padding: 1rem; border-radius: 2px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer; letter-spacing: 0.08em;
+      text-transform: uppercase; transition: background 0.2s; margin-bottom: 0.5rem;
+    }
+    .checkout-btn:hover { background: var(--green-mid); }
+    .cart-note { font-size: 0.72rem; color: var(--text-mid); text-align: center; }
+
+    /* Cart button in nav */
+    .cart-nav-btn {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.4);
+      color: var(--gold); padding: 0.45rem 1rem; border-radius: 2px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .cart-nav-btn:hover { background: rgba(200,168,75,0.25); }
+    .cart-nav-count {
+      background: var(--gold); color: var(--green-deep);
+      font-size: 0.6rem; font-weight: 700; padding: 0.1rem 0.4rem;
+      border-radius: 50px; min-width: 16px; text-align: center;
+    }
+
+    /* Order tracking */
+    .order-track-box {
+      background: var(--cream); border: 1px solid #e0ddd5;
+      border-radius: 4px; padding: 2rem; margin-top: 2rem;
+    }
+    .order-track-title {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem;
+      color: var(--green-deep); margin-bottom: 1.2rem;
+    }
+    .order-track-input-row { display: flex; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .order-track-input {
+      flex: 1; padding: 0.7rem 1rem; border: 1px solid #e0ddd5;
+      border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+      background: var(--white); color: var(--text-dark); min-width: 180px;
+    }
+    .order-track-input:focus { outline: none; border-color: var(--green-mid); }
+    .order-track-btn {
+      background: var(--green-deep); color: var(--cream); border: none;
+      padding: 0.7rem 1.5rem; border-radius: 2px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer; letter-spacing: 0.06em;
+      text-transform: uppercase; transition: background 0.2s; white-space: nowrap;
+    }
+    .order-track-btn:hover { background: var(--green-mid); }
+    .order-result { display: none; }
+    .order-steps {
+      display: flex; gap: 0; margin-top: 1.5rem; position: relative;
+    }
+    .order-steps::before {
+      content: ''; position: absolute; top: 16px; left: 16px; right: 16px;
+      height: 2px; background: #e0ddd5; z-index: 0;
+    }
+    .order-step { flex: 1; text-align: center; position: relative; z-index: 1; }
+    .order-step-dot {
+      width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 0.6rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; border: 2px solid #e0ddd5;
+      background: var(--white);
+    }
+    .order-step.done .order-step-dot { background: var(--green-mid); border-color: var(--green-mid); color: var(--white); }
+    .order-step.current .order-step-dot { background: var(--gold); border-color: var(--gold); color: var(--green-deep); }
+    .order-step-label { font-size: 0.72rem; color: var(--text-mid); font-weight: 500; }
+    .order-step.done .order-step-label,
+    .order-step.current .order-step-label { color: var(--green-deep); font-weight: 600; }
+
+    /* Checkout modal */
+    .checkout-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5); z-index: 400;
+      align-items: center; justify-content: center;
+    }
+    .checkout-overlay.open { display: flex; }
+    .checkout-modal {
+      background: var(--white); border-radius: 4px; width: 520px;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .checkout-modal-header {
+      padding: 1.5rem; border-bottom: 1px solid #eee;
+      background: var(--green-deep); display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .checkout-modal-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); }
+    .checkout-modal-close { background: none; border: none; color: var(--cream); font-size: 1.3rem; cursor: pointer; }
+    .checkout-modal-body { padding: 1.5rem; }
+    .checkout-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .checkout-form-group { margin-bottom: 1rem; }
+    .checkout-label { display: block; font-size: 0.72rem; font-weight: 600; color: var(--text-mid); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .checkout-input {
+      width: 100%; border: 1px solid #e0ddd5; border-radius: 2px;
+      padding: 0.65rem 0.9rem; font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem; color: var(--text-dark); background: var(--cream);
+    }
+    .checkout-input:focus { outline: none; border-color: var(--green-mid); }
+    .checkout-summary {
+      background: var(--cream); border-radius: 3px;
+      padding: 1rem; margin-bottom: 1.2rem; font-size: 0.82rem;
+    }
+    .checkout-summary-row { display: flex; justify-content: space-between; padding: 0.3rem 0; color: var(--text-mid); }
+    .checkout-summary-row.total { font-weight: 700; color: var(--green-deep); font-size: 0.9rem; border-top: 1px solid #ddd; margin-top: 0.4rem; padding-top: 0.6rem; }
+    .checkout-place-btn {
+      width: 100%; background: var(--green-deep); color: var(--cream);
+      border: none; padding: 1rem; border-radius: 2px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer; letter-spacing: 0.08em;
+      text-transform: uppercase; transition: background 0.2s;
+    }
+    .checkout-place-btn:hover { background: var(--green-mid); }
+    .checkout-success { display: none; text-align: center; padding: 2rem; }
+    .checkout-success-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .checkout-success-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--green-deep); margin-bottom: 0.5rem; }
+    .checkout-success-order { font-size: 0.82rem; color: var(--text-mid); line-height: 1.6; }
+    .checkout-success-order strong { color: var(--green-deep); }
+
+    @media (max-width: 900px) {
+      .shop-grid { grid-template-columns: 1fr 1fr; }
+      .cart-drawer { width: 100%; }
+      .order-track-input-row { flex-direction: column; }
+    }
+    @media (max-width: 600px) {
+      .shop-grid { grid-template-columns: 1fr; }
+    }
+
+
+    /* ════════════════════════════════════════════
+       INVEST NOW DROPDOWN
+    ════════════════════════════════════════════ */
+    .invest-dropdown-wrap {
+      position: relative;
+    }
+    .invest-now-btn {
+      background: var(--gold); color: var(--green-deep);
+      padding: 0.6rem 1.5rem; border-radius: 2px;
+      font-weight: 600; font-size: 0.85rem;
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      transition: background 0.2s; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .invest-now-btn:hover { background: #dfc06a; }
+    .invest-now-btn svg { transition: transform 0.2s; }
+    .invest-now-btn.open svg { transform: rotate(180deg); }
+
+    .invest-panel {
+      position: fixed; top: 66px; right: 2rem;
+      width: 680px; max-height: calc(100vh - 80px);
+      background: var(--green-deep);
+      border: 1px solid rgba(200,168,75,0.25);
+      border-radius: 4px; overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+      z-index: 200;
+      opacity: 0; transform: translateY(-8px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .invest-panel.open {
+      opacity: 1; transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+    .invest-panel-inner { display: grid; grid-template-columns: 1fr 1fr; }
+
+    /* Left — investment info */
+    .invest-info {
+      padding: 2rem; border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .invest-info-tag {
+      font-size: 0.65rem; font-weight: 600; color: var(--gold);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .invest-info-title {
+      font-family: 'Playfair Display', serif; font-size: 1.3rem;
+      font-weight: 700; color: var(--cream); line-height: 1.2; margin-bottom: 1.2rem;
+    }
+
+    /* Process steps */
+    .invest-steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 1.5rem; }
+    .invest-step {
+      display: flex; gap: 0.9rem; align-items: flex-start;
+      padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .invest-step:last-child { border-bottom: none; }
+    .invest-step-num {
+      width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.4);
+      color: var(--gold); font-size: 0.72rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+    }
+    .invest-step-body {}
+    .invest-step-title { font-size: 0.82rem; font-weight: 600; color: var(--cream); margin-bottom: 0.2rem; }
+    .invest-step-desc { font-size: 0.75rem; color: rgba(240,235,224,0.55); line-height: 1.5; }
+
+    /* ROI tiers */
+    .invest-tiers { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2rem; }
+    .invest-tier {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 3px; padding: 0.7rem 1rem;
+    }
+    .invest-tier-left {}
+    .invest-tier-amount { font-size: 0.82rem; font-weight: 600; color: var(--cream); }
+    .invest-tier-crop { font-size: 0.7rem; color: rgba(240,235,224,0.45); margin-top: 0.1rem; }
+    .invest-tier-right { text-align: right; }
+    .invest-tier-roi {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem;
+      font-weight: 700; color: var(--gold); line-height: 1;
+    }
+    .invest-tier-period { font-size: 0.65rem; color: rgba(240,235,224,0.4); margin-top: 0.1rem; }
+
+    .invest-note {
+      font-size: 0.72rem; color: rgba(240,235,224,0.35); line-height: 1.5;
+      border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.8rem;
+    }
+
+    /* Right — sign-up form */
+    .invest-form-col {
+      padding: 2rem; background: rgba(0,0,0,0.15);
+    }
+    .invest-form-tag {
+      font-size: 0.65rem; font-weight: 600; color: var(--gold);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .invest-form-title {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem;
+      color: var(--cream); margin-bottom: 1.2rem; line-height: 1.3;
+    }
+    .invest-field { margin-bottom: 0.9rem; }
+    .invest-field label {
+      display: block; font-size: 0.68rem; font-weight: 600;
+      color: rgba(240,235,224,0.5); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 0.35rem;
+    }
+    .invest-field input,
+    .invest-field select {
+      width: 100%; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 2px;
+      padding: 0.6rem 0.8rem; color: var(--cream);
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      transition: border-color 0.2s;
+    }
+    .invest-field input::placeholder { color: rgba(240,235,224,0.25); }
+    .invest-field input:focus,
+    .invest-field select:focus { outline: none; border-color: rgba(200,168,75,0.5); }
+    .invest-field select option { background: var(--green-deep); color: var(--cream); }
+    .invest-submit {
+      width: 100%; background: var(--gold); color: var(--green-deep);
+      border: none; padding: 0.8rem; border-radius: 2px; margin-top: 0.4rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .invest-submit:hover { background: #dfc06a; }
+    .invest-form-success {
+      display: none; background: rgba(76,175,80,0.1);
+      border: 1px solid rgba(76,175,80,0.3); border-radius: 3px;
+      padding: 1rem; text-align: center; margin-top: 0.8rem;
+    }
+    .invest-form-success-title {
+      font-family: 'Playfair Display', serif; font-size: 1rem;
+      color: var(--cream); margin-bottom: 0.3rem;
+    }
+    .invest-form-success p { font-size: 0.75rem; color: rgba(240,235,224,0.6); line-height: 1.5; }
+
+    /* Overlay to close panel on outside click */
+    .invest-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 199;
+    }
+    .invest-backdrop.open { display: block; }
+
+    @media (max-width: 900px) {
+      .invest-panel { width: calc(100vw - 2rem); right: 1rem; }
+      .invest-panel-inner { grid-template-columns: 1fr; }
+      .invest-info { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    }
+
   </style>
 </head>
 <body>
@@ -489,9 +1207,187 @@
       <li><a href="#market">Market</a></li>
       <li><a href="#impact">Impact</a></li>
       <li><a href="#financials">Financials</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#shop">Farm Shop</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">Invest Now</a>
+    <div style="display:flex;align-items:center;gap:0.8rem;">
+      <button class="cart-nav-btn" onclick="toggleCart()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Cart <span class="cart-nav-count" id="cartNavCount">0</span>
+      </button>
+      <div class="invest-dropdown-wrap">
+        <button class="invest-now-btn" id="investBtn" onclick="toggleInvest()">
+          Invest Now
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+
+      <!-- Invest backdrop -->
+      <div class="invest-backdrop" id="investBackdrop" onclick="closeInvest()"></div>
+
+      <!-- Invest Panel -->
+      <div class="invest-panel" id="investPanel">
+        <div class="invest-panel-inner">
+
+          <!-- LEFT: How It Works -->
+          <div class="invest-info">
+            <div class="invest-info-tag">How It Works</div>
+            <div class="invest-info-title">Grow your money while<br>growing Sierra Leone</div>
+
+            <div class="invest-steps">
+              <div class="invest-step">
+                <div class="invest-step-num">1</div>
+                <div class="invest-step-body">
+                  <div class="invest-step-title">Register Your Interest</div>
+                  <div class="invest-step-desc">Complete the sign-up form. Our Investment Manager will contact you within 48 hours to discuss available projects and match you to the right crop cycle.</div>
+                </div>
+              </div>
+              <div class="invest-step">
+                <div class="invest-step-num">2</div>
+                <div class="invest-step-body">
+                  <div class="invest-step-title">Choose Your Project & Amount</div>
+                  <div class="invest-step-desc">Select from our active investment packages — Rice, Cassava, Maize, or mixed portfolio. Minimum entry from $500. Maximum uncapped.</div>
+                </div>
+              </div>
+              <div class="invest-step">
+                <div class="invest-step-num">3</div>
+                <div class="invest-step-body">
+                  <div class="invest-step-title">Sign Investment Agreement</div>
+                  <div class="invest-step-desc">A formal agreement is signed outlining your invested amount, expected ROI, crop cycle duration, payout schedule, and terms.</div>
+                </div>
+              </div>
+              <div class="invest-step">
+                <div class="invest-step-num">4</div>
+                <div class="invest-step-body">
+                  <div class="invest-step-title">Track Your Investment</div>
+                  <div class="invest-step-desc">Access your personal Investor Portal to follow crop progress, field reports, and live project updates throughout the cycle.</div>
+                </div>
+              </div>
+              <div class="invest-step">
+                <div class="invest-step-num">5</div>
+                <div class="invest-step-body">
+                  <div class="invest-step-title">Receive Your Returns</div>
+                  <div class="invest-step-desc">At harvest, your principal plus agreed returns are paid directly to your bank account or mobile money — on schedule, every cycle.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="invest-info-tag" style="margin-bottom:0.6rem;">Investment Tiers & Returns</div>
+            <div class="invest-tiers">
+              <div class="invest-tier">
+                <div class="invest-tier-left">
+                  <div class="invest-tier-amount">$500 – $2,000</div>
+                  <div class="invest-tier-crop">Starter — Vegetable &amp; Maize cycles</div>
+                </div>
+                <div class="invest-tier-right">
+                  <div class="invest-tier-roi">10% ROI</div>
+                  <div class="invest-tier-period">Per 3–4 month cycle</div>
+                </div>
+              </div>
+              <div class="invest-tier">
+                <div class="invest-tier-left">
+                  <div class="invest-tier-amount">$2,001 – $10,000</div>
+                  <div class="invest-tier-crop">Growth — Rice &amp; Cassava cycles</div>
+                </div>
+                <div class="invest-tier-right">
+                  <div class="invest-tier-roi">13% ROI</div>
+                  <div class="invest-tier-period">Per 4–6 month cycle</div>
+                </div>
+              </div>
+              <div class="invest-tier">
+                <div class="invest-tier-left">
+                  <div class="invest-tier-amount">$10,001 – $50,000</div>
+                  <div class="invest-tier-crop">Premium — Multi-crop portfolio</div>
+                </div>
+                <div class="invest-tier-right">
+                  <div class="invest-tier-roi">17% ROI</div>
+                  <div class="invest-tier-period">Per cycle, quarterly payouts</div>
+                </div>
+              </div>
+              <div class="invest-tier">
+                <div class="invest-tier-left">
+                  <div class="invest-tier-amount">$50,000+</div>
+                  <div class="invest-tier-crop">Strategic — Custom partnership</div>
+                </div>
+                <div class="invest-tier-right">
+                  <div class="invest-tier-roi">20%+ ROI</div>
+                  <div class="invest-tier-period">Negotiated terms</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="invest-note">
+              Returns are estimates based on historical crop performance. All investments carry agricultural risk. Eco-Farm Limited operates as a Private Limited Company — full investor agreements provided before capital commitment.
+            </div>
+          </div>
+
+          <!-- RIGHT: Sign-Up Form -->
+          <div class="invest-form-col">
+            <div class="invest-form-tag">Get Started</div>
+            <div class="invest-form-title">Register Your<br>Investment Interest</div>
+
+            <div class="invest-field">
+              <label>Full Name</label>
+              <input type="text" id="invFname" placeholder="e.g. James Koroma">
+            </div>
+            <div class="invest-field">
+              <label>Email Address</label>
+              <input type="email" id="invEmail" placeholder="your@email.com">
+            </div>
+            <div class="invest-field">
+              <label>Phone / WhatsApp</label>
+              <input type="text" id="invPhone" placeholder="+232 XX XXX XXXX">
+            </div>
+            <div class="invest-field">
+              <label>Country of Residence</label>
+              <input type="text" id="invCountry" placeholder="e.g. Sierra Leone, UK, USA">
+            </div>
+            <div class="invest-field">
+              <label>Investment Range</label>
+              <select id="invRange">
+                <option value="">Select your budget</option>
+                <option>$500 – $2,000 (Starter — 10% ROI)</option>
+                <option>$2,001 – $10,000 (Growth — 13% ROI)</option>
+                <option>$10,001 – $50,000 (Premium — 17% ROI)</option>
+                <option>$50,000+ (Strategic — 20%+ ROI)</option>
+              </select>
+            </div>
+            <div class="invest-field">
+              <label>Preferred Crop / Project</label>
+              <select id="invCrop">
+                <option value="">Any / Let Ecofarm recommend</option>
+                <option>Rice</option>
+                <option>Cassava</option>
+                <option>Maize</option>
+                <option>Vegetables</option>
+                <option>Mixed Portfolio</option>
+              </select>
+            </div>
+            <div class="invest-field">
+              <label>How did you hear about us?</label>
+              <select id="invSource">
+                <option value="">Select</option>
+                <option>Website</option>
+                <option>Referral from investor</option>
+                <option>Social media</option>
+                <option>Word of mouth</option>
+                <option>Event / Conference</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <button class="invest-submit" onclick="submitInvestInterest()">Submit Interest</button>
+
+            <div class="invest-form-success" id="investSuccess">
+              <div class="invest-form-success-title">Application Received</div>
+              <p>Thank you. Our Investment Manager will contact you within <strong style="color:var(--gold)">48 hours</strong> to discuss your investment and next steps.<br><br>Welcome to the Eco-Farm family.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -509,7 +1405,7 @@
         </p>
         <div class="hero-btns">
           <a href="#contact" class="btn-primary">Partner With Us</a>
-          <a href="#about" class="btn-outline">Learn More</a>
+          <a href="#dashboard" class="btn-outline">Farmer Dashboard</a>
         </div>
       </div>
       <div class="hero-stats">
@@ -543,7 +1439,7 @@
       <div class="about-grid">
         <div class="about-visual fade-up">
           <div class="about-img-frame">
-            <div class="about-img-inner">🌾</div>
+            <div class="about-img-inner"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="1.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3C12 3 7 7 7 13a5 5 0 0010 0c0-6-5-10-5-10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 13v8M9 18c1-.5 2-1 3-1"/></svg></div>
           </div>
           <div class="about-badge">
             <div class="about-badge-num">5</div>
@@ -556,21 +1452,21 @@
           <p class="section-lead">Eco-Farm Limited is a Private Limited Company registered in Sierra Leone, with expansion plans across West Africa. We uniquely blend food production with agritech innovation and investor-backed growth — positioning ourselves as both a producer and a platform.</p>
           <div class="pillars">
             <div class="pillar">
-              <div class="pillar-icon">🌱</div>
+              <div class="pillar-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2C6.5 2 4 7 4 12s4 8 8 8 8-4 8-8-2.5-10-8-10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 12v8"/></svg></div>
               <div>
                 <h4>Food Production</h4>
                 <p>Large-scale farming of staple crops and high-value produce, with processing and distribution included.</p>
               </div>
             </div>
             <div class="pillar">
-              <div class="pillar-icon">💻</div>
+              <div class="pillar-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path stroke-linecap="round" d="M8 21h8M12 17v4"/></svg></div>
               <div>
                 <h4>Agritech</h4>
                 <p>Smart farming tools, yield-tracking apps, logistics platforms, and digital dashboards for investors and farmers.</p>
               </div>
             </div>
             <div class="pillar">
-              <div class="pillar-icon">📈</div>
+              <div class="pillar-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
               <div>
                 <h4>Agri-Investment</h4>
                 <p>Structured investment opportunities where individuals and institutions fund agricultural projects and receive 10–20% ROI.</p>
@@ -592,17 +1488,17 @@
       </div>
       <div class="market-cards">
         <div class="market-card fade-up">
-          <div class="market-card-icon">📈</div>
+          <div class="market-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
           <h3>Market Opportunity</h3>
           <p>Rising demand for food security, increasing global interest in Africa impact investment, and untapped agritech adoption potential across Sierra Leone and West Africa.</p>
         </div>
         <div class="market-card fade-up">
-          <div class="market-card-icon">⚠️</div>
+          <div class="market-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
           <h3>Industry Challenges</h3>
           <p>Traditional farms and cooperatives dominate but lack integrated technology and investment. NGO-funded projects exist but often lack scalability and commercial viability.</p>
         </div>
         <div class="market-card fade-up">
-          <div class="market-card-icon">🛡️</div>
+          <div class="market-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
           <h3>Ecofarm's Edge</h3>
           <p>A unified model combining food production, technology, and investor returns — the only platform in the region to integrate all three at scale.</p>
         </div>
@@ -620,21 +1516,21 @@
       </div>
       <div class="products-grid">
         <div class="product-card fade-up">
-          <div class="product-card-header green">🌾</div>
+          <div class="product-card-header green"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="1.3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2C12 2 7 7 7 13a5 5 0 0010 0c0-6-5-10-5-10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 13v8"/></svg></div>
           <div class="product-card-body">
             <h3>Food Production</h3>
             <p>Large-scale farming of staple crops (rice, cassava, maize) and high-value produce (vegetables, fruits), with onsite processing and distribution to local and export markets.</p>
           </div>
         </div>
         <div class="product-card fade-up">
-          <div class="product-card-header teal">📱</div>
+          <div class="product-card-header teal"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 24 24" stroke="#00695c" stroke-width="1.3"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1" fill="#00695c"/></svg></div>
           <div class="product-card-body">
             <h3>Agritech Solutions</h3>
             <p>Smart farming tools, yield-tracking apps, logistics platforms, and digital investor dashboards that bring transparency and data-driven decision-making to every farm.</p>
           </div>
         </div>
         <div class="product-card fade-up">
-          <div class="product-card-header gold">💰</div>
+          <div class="product-card-header gold"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 24 24" stroke="#b8860b" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v10M9.5 9.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5c0 2.5-5 2.5-5 5 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5"/></svg></div>
           <div class="product-card-body">
             <h3>Agri-Investment Packages</h3>
             <p>Structured opportunities for individuals and institutions to fund agricultural projects and receive 10–20% ROI depending on crop cycles and market conditions.</p>
@@ -653,12 +1549,12 @@
         <p class="section-lead">A diverse mix of staple and high-value crops designed for food security and export potential.</p>
       </div>
       <div class="crops-grid fade-up">
-        <div class="crop-chip"><span>🌾</span> Rice</div>
-        <div class="crop-chip"><span>🍠</span> Cassava</div>
-        <div class="crop-chip"><span>🌽</span> Maize</div>
-        <div class="crop-chip"><span>🥜</span> Groundnuts</div>
-        <div class="crop-chip"><span>🥦</span> Vegetables</div>
-        <div class="crop-chip"><span>🍫</span> Cocoa &amp; Oil Palm</div>
+        <div class="crop-chip">Rice</div>
+        <div class="crop-chip">Cassava</div>
+        <div class="crop-chip">Maize</div>
+        <div class="crop-chip">Groundnuts</div>
+        <div class="crop-chip">Vegetables</div>
+        <div class="crop-chip">Cocoa &amp; Oil Palm</div>
       </div>
     </div>
   </section>
@@ -686,7 +1582,7 @@
         </div>
       </div>
       <div class="value-prop fade-up">
-        <p>💡 <strong>Triple value proposition:</strong> Farmers gain access to capital, technology, and markets. Investors gain transparent, measurable returns. Communities benefit from job creation and sustainable practices.</p>
+        <p><strong>Value Proposition:</strong> Farmers gain access to capital, technology, and markets. Investors gain transparent, measurable returns. Communities benefit from job creation and sustainable practices.</p>
       </div>
     </div>
   </section>
@@ -701,25 +1597,25 @@
       </div>
       <div class="roadmap-steps fade-up">
         <div class="roadmap-step">
-          <div class="roadmap-dot">🌱</div>
+          <div class="roadmap-dot">01</div>
           <div class="roadmap-year">Pilot Phase</div>
           <h4>Launch</h4>
           <p>Launch a pilot farm in Sierra Leone with integrated agritech and initial investor backing.</p>
         </div>
         <div class="roadmap-step">
-          <div class="roadmap-dot">🚜</div>
+          <div class="roadmap-dot">02</div>
           <div class="roadmap-year">Expansion Phase</div>
           <h4>Scale</h4>
           <p>Scale food production regionally, introduce agritech solutions, and build distribution networks.</p>
         </div>
         <div class="roadmap-step">
-          <div class="roadmap-dot">💻</div>
+          <div class="roadmap-dot">03</div>
           <div class="roadmap-year">Platform Phase</div>
           <h4>Invest</h4>
           <p>Launch a digital investment platform where investors track projects, returns, and impact in real time.</p>
         </div>
         <div class="roadmap-step">
-          <div class="roadmap-dot">🌍</div>
+          <div class="roadmap-dot">04</div>
           <div class="roadmap-year">Year 5</div>
           <h4>Maturity</h4>
           <p>Regional operations live, export markets active, and West Africa's leading agribusiness platform established.</p>
@@ -815,10 +1711,10 @@
           <p style="color: var(--text-mid); line-height: 1.7; margin-bottom: 1.5rem;">
             We invite impact investors and strategic partners to join Eco-Farm Limited. Our next steps: secure seed capital, finalise the pilot site, onboard strategic partners, and launch the digital investor platform.
           </p>
-          <div class="contact-detail"><span>📍</span><span>Sierra Leone — Regional expansion across West Africa</span></div>
-          <div class="contact-detail"><span>👤</span><span>CEO: Henrison (Founder)</span></div>
-          <div class="contact-detail"><span>🎯</span><span>Targeting impact investors, agribusiness partners &amp; farmers</span></div>
-          <div class="contact-detail"><span>💼</span><span>Private Limited Company — Transparent investor reporting</span></div>
+          <div class="contact-detail"><span>&#9679;</span><span>Sierra Leone — Regional expansion across West Africa</span></div>
+          <div class="contact-detail"><span>&#9679;</span><span>CEO: Henrison (Founder)</span></div>
+          <div class="contact-detail"><span>&#9679;</span><span>Targeting impact investors, agribusiness partners &amp; farmers</span></div>
+          <div class="contact-detail"><span>&#9679;</span><span>Private Limited Company — Transparent investor reporting</span></div>
         </div>
         <div class="fade-up">
           <div class="form-row">
@@ -853,12 +1749,753 @@
           </div>
           <button class="form-submit" onclick="submitForm()">Send Message →</button>
           <div class="form-success" id="form-success">
-            ✅ Thank you! We'll be in touch shortly.
+            Message received. We'll be in touch shortly.
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- FARMER DASHBOARD -->
+  <section id="dashboard">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-tag">Farmer Portal</div>
+        <h2 class="section-title">Farmer Dashboard</h2>
+        <p class="section-lead">Track your crops, log field activities, view your partnership status, and stay on top of planting schedules — all in one place.</p>
+      </div>
+
+      <!-- LOGIN GATE -->
+      <div class="dash-gate fade-up" id="dashGate">
+        <div class="dash-gate-header">
+          
+          <h3>Farmer Login</h3>
+          <p>Sign in to access your personal dashboard</p>
+        </div>
+        <div class="dash-gate-body">
+          <div class="form-group">
+            <label>Farmer ID or Name</label>
+            <input type="text" id="loginName" placeholder="e.g. Farmer001 or Aminata Koroma">
+          </div>
+          <div class="form-group">
+            <label>PIN / Password</label>
+            <input type="password" id="loginPin" placeholder="Enter your PIN">
+          </div>
+          <button class="dash-login-btn" onclick="dashLogin()">Access Dashboard →</button>
+          <p class="dash-demo-hint">Demo: enter any name + PIN <strong>1234</strong></p>
+        </div>
+      </div>
+
+      <!-- MAIN DASHBOARD -->
+      <div class="dash-main" id="dashMain">
+
+        <!-- Top Bar -->
+        <div class="dash-topbar">
+          <div class="dash-farmer-info">
+            <div class="dash-avatar" id="dashAvatar">A</div>
+            <div>
+              <div class="dash-farmer-name" id="dashName">Aminata Koroma</div>
+              <div class="dash-farmer-id">ID: ECF-2025-007 · Partner Farmer</div>
+            </div>
+          </div>
+          <div class="dash-topbar-right">
+            <div class="dash-badge">Active Season</div>
+            <button class="dash-logout" onclick="dashLogout()">Log Out</button>
+          </div>
+        </div>
+
+        <!-- KPI Stats -->
+        <div class="dash-stats">
+          <div class="dash-stat-card">
+            <div class="dash-stat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2C12 2 7 7 7 13a5 5 0 0010 0c0-6-5-10-5-10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 13v8"/></svg></div>
+            <div class="dash-stat-num">3</div>
+            <div class="dash-stat-label">Active Crops</div>
+            <div class="dash-stat-change up">↑ 1 from last season</div>
+          </div>
+          <div class="dash-stat-card gold">
+            <div class="dash-stat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path stroke-linecap="round" d="M3 9h18M9 3v18"/></svg></div>
+            <div class="dash-stat-num">4.5 ac</div>
+            <div class="dash-stat-label">Land Under Cultivation</div>
+            <div class="dash-stat-change up">↑ 0.5 ac expanded</div>
+          </div>
+          <div class="dash-stat-card blue">
+            <div class="dash-stat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v10M9.5 9.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5c0 2.5-5 2.5-5 5 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5"/></svg></div>
+            <div class="dash-stat-num">NLe 820</div>
+            <div class="dash-stat-label">Est. Season Earnings</div>
+            <div class="dash-stat-change up">↑ 18% vs last cycle</div>
+          </div>
+          <div class="dash-stat-card orange">
+            <div class="dash-stat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="#2e7d32"/></svg></div>
+            <div class="dash-stat-num">74%</div>
+            <div class="dash-stat-label">Yield Target Progress</div>
+            <div class="dash-stat-change up">On track</div>
+          </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="dash-tabs">
+          <button class="dash-tab active" onclick="switchTab('overview', this)">Overview</button>
+          <button class="dash-tab" onclick="switchTab('crops', this)">My Crops</button>
+          <button class="dash-tab" onclick="switchTab('schedule', this)">Schedule</button>
+          <button class="dash-tab" onclick="switchTab('logwork', this)">Log Work</button>
+          <button class="dash-tab" onclick="switchTab('support', this)">Support</button>
+        </div>
+
+        <!-- OVERVIEW TAB -->
+        <div class="dash-panel active" id="tab-overview">
+          <div class="dash-grid">
+            <!-- Crop Progress -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h4>Crop Growth Progress</h4>
+                <span style="font-size:0.78rem; color:var(--text-mid);">Current Season</span>
+              </div>
+              <div class="dash-card-body">
+                <div class="crop-progress-item">
+                  <div class="crop-progress-top"><span>Rice (Lowland)</span><span>Week 8 of 14</span></div>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:57%"></div></div>
+                </div>
+                <div class="crop-progress-item">
+                  <div class="crop-progress-top"><span>Cassava</span><span>Month 4 of 9</span></div>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill gold" style="width:44%"></div></div>
+                </div>
+                <div class="crop-progress-item">
+                  <div class="crop-progress-top"><span>Vegetables (Leafy)</span><span>Week 3 of 5</span></div>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill blue" style="width:60%"></div></div>
+                </div>
+                <hr style="margin: 1.2rem 0; border:none; border-top: 1px solid #f0f0f0;">
+                <div style="font-size:0.82rem; color:var(--text-mid);">Next action: Apply second fertiliser round to Rice — due in <strong style="color:var(--green-mid)">3 days</strong></div>
+              </div>
+            </div>
+
+            <!-- Right column: Weather + Alerts -->
+            <div>
+              <!-- Weather -->
+              <div class="weather-widget">
+                <div class="weather-top">
+                  <div>
+                    <div class="weather-temp">28°C</div>
+                    <div class="weather-desc">Partly Cloudy</div>
+                    <div class="weather-location">Bo District, Sierra Leone</div>
+                  </div>
+                  <div class="weather-icon"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 24 24" stroke="rgba(245,240,232,0.7)" stroke-width="1.3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.36-6.36-.7.7M6.34 17.66l-.7.7m12.72 0-.7-.7M6.34 6.34l-.7-.7"/><circle cx="12" cy="12" r="4"/></svg></div>
+                </div>
+                <div class="weather-details">
+                  <div class="weather-detail">
+                    <div class="weather-detail-val">72%</div>
+                    <div class="weather-detail-key">Humidity</div>
+                  </div>
+                  <div class="weather-detail">
+                    <div class="weather-detail-val">12 km/h</div>
+                    <div class="weather-detail-key">Wind</div>
+                  </div>
+                  <div class="weather-detail">
+                    <div class="weather-detail-val">Good</div>
+                    <div class="weather-detail-key">Farm Day</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Alerts -->
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <h4>Alerts &amp; Advisories</h4>
+                </div>
+                <div class="dash-card-body">
+                  <div class="dash-alerts">
+                    <div class="dash-alert warn">
+                      <span style="font-weight:700;">!</span>
+                      <div><strong>Pest Risk</strong> Armyworm activity reported nearby. Inspect rice field this week.</div>
+                    </div>
+                    <div class="dash-alert info">
+                      <span>&#10003;</span>
+                      <div><strong>Input Delivery</strong> Fertiliser batch confirmed — arriving Thursday.</div>
+                    </div>
+                    <div class="dash-alert tip">
+                      <span>i</span>
+                      <div><strong>Tip</strong> Cassava responds well to mulching in dry spells. Apply now.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Feed -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h4>Recent Activity</h4>
+              <span style="font-size:0.78rem; color:var(--text-mid);">Last 7 days</span>
+            </div>
+            <div class="dash-card-body">
+              <div class="activity-feed">
+                <div class="activity-item">
+                  <div class="activity-dot green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="2"><path stroke-linecap="round" d="M20 17.5c0 2.49-1.79 4.5-4 4.5s-4-2.01-4-4.5S14 9 14 9s6 6.01 6 8.5zM8 9.5C8 11.99 6.21 14 4 14S0 11.99 0 9.5 4 1 4 1s4 6.01 4 8.5z"/></svg></div>
+                  <div><div class="activity-text">Irrigation completed — Rice field (Block A)</div><div class="activity-time">Today, 7:30 AM</div></div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot gold"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#b8860b" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+                  <div><div class="activity-text">Input received: 2 bags urea fertiliser from Ecofarm supply chain</div><div class="activity-time">Yesterday, 2:00 PM</div></div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot blue"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#1565c0" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg></div>
+                  <div><div class="activity-text">Yield data submitted to Ecofarm agritech platform — Week 7</div><div class="activity-time">Mon, 9:15 AM</div></div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot orange"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#e07b39" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg></div>
+                  <div><div class="activity-text">Training session attended: Sustainable soil management — Bo District</div><div class="activity-time">Sat, 10:00 AM</div></div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path stroke-linecap="round" d="M12 12h.01"/></svg></div>
+                  <div><div class="activity-text">Payment received: NLe 215 — Vegetable harvest batch #3</div><div class="activity-time">Fri, 3:45 PM</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CROPS TAB -->
+        <div class="dash-panel" id="tab-crops">
+          <div class="dash-grid">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h4>Select a Crop to View Details</h4>
+              </div>
+              <div class="dash-card-body">
+                <div class="crop-selector">
+                  <button class="crop-btn active" onclick="selectCrop(this, 'rice')">Rice</button>
+                  <button class="crop-btn" onclick="selectCrop(this, 'cassava')">Cassava</button>
+                  <button class="crop-btn" onclick="selectCrop(this, 'maize')">Maize</button>
+                  <button class="crop-btn" onclick="selectCrop(this, 'groundnuts')">Groundnuts</button>
+                  <button class="crop-btn" onclick="selectCrop(this, 'vegetables')">Vegetables</button>
+                  <button class="crop-btn" onclick="selectCrop(this, 'cocoa')">Cocoa &amp; Oil Palm</button>
+                </div>
+                <div id="cropDetail">
+                  <div style="background:var(--cream); border-radius:5px; padding:1.5rem;">
+                    
+                    <h3 style="font-family:'Playfair Display',serif; color:var(--green-deep); margin-bottom:0.5rem;" id="cropDetailName">Rice (Lowland)</h3>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; font-size:0.85rem; margin-top:1rem;">
+                      <div><span style="color:var(--text-mid);">Plot Size</span><br><strong id="cropPlot">2.0 acres — Block A</strong></div>
+                      <div><span style="color:var(--text-mid);">Planted</span><br><strong id="cropPlanted">Oct 15, 2025</strong></div>
+                      <div><span style="color:var(--text-mid);">Expected Harvest</span><br><strong id="cropHarvest">Jan 28, 2026</strong></div>
+                      <div><span style="color:var(--text-mid);">Estimated Yield</span><br><strong id="cropYield">1.8 tonnes</strong></div>
+                      <div><span style="color:var(--text-mid);">Fertiliser</span><br><strong id="cropFert">Urea — 2nd round due</strong></div>
+                      <div><span style="color:var(--text-mid);">Status</span><br><span class="status-pill active" id="cropStatus">Active</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-header"><h4>Yield Performance</h4></div>
+              <div class="dash-card-body">
+                <div class="crop-progress-item">
+                  <div class="crop-progress-top"><span>Current vs Target Yield</span><span id="yieldPct">78%</span></div>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill" id="yieldBar" style="width:78%"></div></div>
+                </div>
+                <div class="crop-progress-item">
+                  <div class="crop-progress-top"><span>Soil Health Score</span><span>82%</span></div>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill gold" style="width:82%"></div></div>
+                </div>
+                <div class="crop-progress-item">
+                  <div class="crop-progress-top"><span>Water Sufficiency</span><span>91%</span></div>
+                  <div class="progress-bar-bg"><div class="progress-bar-fill blue" style="width:91%"></div></div>
+                </div>
+                <hr style="margin:1rem 0; border:none; border-top:1px solid #f0f0f0;">
+                <p style="font-size:0.82rem; color:var(--text-mid); line-height:1.5;" id="cropAdvice">
+                  <strong>Agritech Advice:</strong> Rice field performing above regional average. Maintain current irrigation schedule and apply second urea round within 72 hours for optimal heading stage.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCHEDULE TAB -->
+        <div class="dash-panel" id="tab-schedule">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h4>Farming Schedule — Current Season</h4>
+              <span style="font-size:0.78rem; color:var(--text-mid);">Jan–Mar 2026</span>
+            </div>
+            <div class="dash-card-body" style="overflow-x:auto;">
+              <table class="schedule-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Crop</th>
+                    <th>Activity</th>
+                    <th>Assigned By</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Feb 26</td><td>Rice</td><td>Apply 2nd fertiliser round</td><td>Agritech Lead</td><td><span class="status-pill pending">Pending</span></td></tr>
+                  <tr><td>Feb 28</td><td>Vegetables</td><td>Harvest batch #4 — leafy greens</td><td>Operations Mgr</td><td><span class="status-pill pending">Pending</span></td></tr>
+                  <tr><td>Mar 2</td><td>Rice</td><td>Pest inspection — armyworm check</td><td>Agritech Lead</td><td><span class="status-pill pending">Pending</span></td></tr>
+                  <tr><td>Mar 5</td><td>Cassava</td><td>Weeding — apply mulch around stems</td><td>Field Supervisor</td><td><span class="status-pill pending">Pending</span></td></tr>
+                  <tr><td>Mar 10</td><td>Vegetables</td><td>Replant — next batch (Tomato + Pepper)</td><td>Operations Mgr</td><td><span class="status-pill pending">Pending</span></td></tr>
+                  <tr><td>Mar 15</td><td>Rice</td><td>Irrigation check & water level adjust</td><td>Field Supervisor</td><td><span class="status-pill pending">Pending</span></td></tr>
+                  <tr><td>Jan 28</td><td>Vegetables</td><td>Harvest batch #3 completed</td><td>Self-logged</td><td><span class="status-pill done">Done</span></td></tr>
+                  <tr><td>Jan 20</td><td>Rice</td><td>1st fertiliser application completed</td><td>Agritech Lead</td><td><span class="status-pill done">Done</span></td></tr>
+                  <tr><td>Jan 10</td><td>Cassava</td><td>Training: soil pH management attended</td><td>Ecofarm Training</td><td><span class="status-pill done">Done</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOG WORK TAB -->
+        <div class="dash-panel" id="tab-logwork">
+          <div class="dash-grid">
+            <div class="dash-card">
+              <div class="dash-card-header"><h4>Log Field Activity</h4></div>
+              <div class="dash-card-body">
+                <p style="font-size:0.85rem; color:var(--text-mid); margin-bottom:1.2rem;">Record your daily farm activities to keep your Ecofarm advisor updated and unlock performance bonuses.</p>
+                <div class="crop-log-form">
+                  <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="logDate">
+                  </div>
+                  <div class="form-group">
+                    <label>Crop</label>
+                    <select id="logCrop">
+                      <option>Rice (Lowland)</option>
+                      <option>Cassava</option>
+                      <option>Vegetables</option>
+                      <option>Groundnuts</option>
+                      <option>Maize</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Activity Type</label>
+                    <select id="logType">
+                      <option>Irrigation</option>
+                      <option>Fertilising</option>
+                      <option>Weeding</option>
+                      <option>Pest Control</option>
+                      <option>Harvesting</option>
+                      <option>Planting</option>
+                      <option>Soil Testing</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Hours Worked</label>
+                    <input type="number" id="logHours" placeholder="e.g. 4" min="0.5" step="0.5">
+                  </div>
+                  <div class="form-group" style="grid-column:span 2">
+                    <label>Notes</label>
+                    <input type="text" id="logNotes" placeholder="Brief description of work done...">
+                  </div>
+                  <button class="crop-log-submit" onclick="submitLog()">Submit Activity Log →</button>
+                  <div class="log-success" id="logSuccess">Activity logged successfully. Your advisor has been notified.</div>
+                </div>
+              </div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-header"><h4>This Week's Logged Hours</h4></div>
+              <div class="dash-card-body">
+                <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                  <div class="crop-progress-item">
+                    <div class="crop-progress-top"><span>Monday</span><span>5 hrs</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:62%"></div></div>
+                  </div>
+                  <div class="crop-progress-item">
+                    <div class="crop-progress-top"><span>Tuesday</span><span>7 hrs</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:87%"></div></div>
+                  </div>
+                  <div class="crop-progress-item">
+                    <div class="crop-progress-top"><span>Wednesday</span><span>4 hrs</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill gold" style="width:50%"></div></div>
+                  </div>
+                  <div class="crop-progress-item">
+                    <div class="crop-progress-top"><span>Thursday</span><span>6 hrs</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill blue" style="width:75%"></div></div>
+                  </div>
+                  <div class="crop-progress-item">
+                    <div class="crop-progress-top"><span>Today (Fri)</span><span>3 hrs</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:37%"></div></div>
+                  </div>
+                </div>
+                <hr style="margin:1rem 0; border:none; border-top:1px solid #f0f0f0;">
+                <div style="font-size:0.85rem; color:var(--text-mid);">
+                  Total this week: <strong style="color:var(--green-deep)">25 hrs</strong> &nbsp;|&nbsp;
+                  Weekly target: <strong style="color:var(--green-deep)">35 hrs</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUPPORT TAB -->
+        <div class="dash-panel" id="tab-support">
+          <div class="dash-grid">
+            <div class="dash-card">
+              <div class="dash-card-header"><h4>My Ecofarm Contacts</h4></div>
+              <div class="dash-card-body">
+                <div style="display:flex; flex-direction:column; gap:1rem;">
+                  <div class="activity-item">
+                    <div class="activity-dot green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="2"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg></div>
+                    <div>
+                      <div class="activity-text"><strong>Field Supervisor</strong> — Ibrahim Sesay</div>
+                      <div class="activity-time">Available Mon–Sat, 7am–5pm</div>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <div class="activity-dot blue"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#1565c0" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path stroke-linecap="round" d="M8 21h8M12 17v4"/></svg></div>
+                    <div>
+                      <div class="activity-text"><strong>Agritech Advisor</strong> — Fatima Bangura</div>
+                      <div class="activity-time">Yield tracking &amp; app support</div>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <div class="activity-dot gold"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#b8860b" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v10"/></svg></div>
+                    <div>
+                      <div class="activity-text"><strong>Investment Manager</strong> — Mohamed Conteh</div>
+                      <div class="activity-time">Payment cycles &amp; contracts</div>
+                    </div>
+                  </div>
+                  <div class="activity-item" style="border:none; padding:0;">
+                    <div class="activity-dot orange"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#e07b39" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg></div>
+                    <div>
+                      <div class="activity-text"><strong>CEO / Founder</strong> — Henrison</div>
+                      <div class="activity-time">Partnerships &amp; strategy</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-header"><h4>Resources &amp; Training</h4></div>
+              <div class="dash-card-body">
+                <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                  <div class="dash-alert info"><span>&#9632;</span><div><strong>Sustainable Soil Guide</strong> — PDF download available from your advisor</div></div>
+                  <div class="dash-alert tip"><span>&#9654;</span><div><strong>Video: Cassava Best Practices</strong> — Watch via Ecofarm AgriApp</div></div>
+                  <div class="dash-alert warn"><span>!</span><div><strong>Next Training</strong> — Water management workshop, Mar 12, Bo District</div></div>
+                  <div class="dash-alert info"><span>&#9632;</span><div><strong>Ecofarm AgriApp</strong> — Download on Android for real-time yield tracking</div></div>
+                </div>
+                <hr style="margin:1.2rem 0; border:none; border-top:1px solid #f0f0f0;">
+                <p style="font-size:0.82rem; color:var(--text-mid); line-height:1.6;">
+                  Need help? Contact your field supervisor or send a message to <strong style="color:var(--green-mid)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e0939590908f9294a085838f8681928dce938c">[email&#160;protected]</a></strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /dash-main -->
+    </div>
+  </section>
+
+
+  <!-- FARM SHOP -->
+  <section id="shop">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-tag">Fresh From Our Fields</div>
+        <h2 class="section-title">Farm Shop</h2>
+        <p class="section-lead">Buy directly from Eco-Farm partner farmers — certified organic produce, freshly harvested and delivered to your door across Sierra Leone.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="shop-filters fade-up">
+        <button class="shop-filter-btn active" onclick="filterProducts('all', this)">All Products</button>
+        <button class="shop-filter-btn" onclick="filterProducts('grains', this)">Grains & Staples</button>
+        <button class="shop-filter-btn" onclick="filterProducts('vegetables', this)">Vegetables</button>
+        <button class="shop-filter-btn" onclick="filterProducts('fruits', this)">Fruits</button>
+        <button class="shop-filter-btn" onclick="filterProducts('oils', this)">Oils & Produce</button>
+        <div class="shop-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" placeholder="Search products..." oninput="searchProducts(this.value)">
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="shop-grid" id="shopGrid">
+
+        <div class="product-card fade-up" data-category="grains">
+          <div class="product-img rice">
+            <div class="product-img-inner">
+              <svg width="72" height="72" viewBox="0 0 64 64" fill="none">
+                <ellipse cx="32" cy="48" rx="18" ry="6" fill="#a5d6a7" opacity="0.4"/>
+                <path d="M32 10 Q38 20 38 32 Q38 44 32 52 Q26 44 26 32 Q26 20 32 10Z" fill="#66bb6a"/>
+                <path d="M32 10 Q34 22 33 34" stroke="#43a047" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <span class="product-badge organic">Organic</span>
+          </div>
+          <div class="product-body">
+            <div class="product-farmer">Grown by Aminata Koroma</div>
+            <div class="product-name">Local White Rice</div>
+            <div class="product-desc">Premium lowland rice from Bo District. Hand-sorted, sun-dried, pesticide-free. Rich in nutrients and grown using sustainable irrigation methods.</div>
+            <div class="product-meta">
+              <span class="product-tag">Bo District</span>
+              <span class="product-tag">Pesticide-free</span>
+              <span class="product-tag">Sun-dried</span>
+            </div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">NLe 85 <span>/ 5kg bag</span></div>
+            <button class="add-to-cart" onclick="addToCart(this, 'Local White Rice', 85, 'rice', 'Aminata Koroma', '5kg bag')">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card fade-up" data-category="grains">
+          <div class="product-img cassava">
+            <div class="product-img-inner">
+              <svg width="72" height="72" viewBox="0 0 64 64" fill="none">
+                <path d="M20 52 Q24 30 32 18 Q40 30 44 52" stroke="#f9a825" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <ellipse cx="32" cy="16" rx="5" ry="7" fill="#ffd54f"/>
+                <path d="M28 28 Q24 32 22 38" stroke="#f9a825" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M36 28 Q40 32 42 38" stroke="#f9a825" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="product-badge seasonal">Seasonal</span>
+          </div>
+          <div class="product-body">
+            <div class="product-farmer">Grown by Ibrahim Sesay</div>
+            <div class="product-name">Fresh Cassava</div>
+            <div class="product-desc">Freshly harvested cassava from Kenema District. High starch content, ideal for fufu, cassava bread, and traditional dishes. Available whole or peeled.</div>
+            <div class="product-meta">
+              <span class="product-tag">Kenema</span>
+              <span class="product-tag">Freshly harvested</span>
+            </div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">NLe 45 <span>/ 10kg</span></div>
+            <button class="add-to-cart" onclick="addToCart(this, 'Fresh Cassava', 45, 'cassava', 'Ibrahim Sesay', '10kg')">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card fade-up" data-category="grains">
+          <div class="product-img maize">
+            <div class="product-img-inner">
+              <svg width="72" height="72" viewBox="0 0 64 64" fill="none">
+                <rect x="26" y="14" width="12" height="30" rx="6" fill="#ffb300"/>
+                <path d="M26 20 Q20 22 20 30 Q20 38 26 40" stroke="#f57f17" stroke-width="1.5" fill="none"/>
+                <path d="M38 20 Q44 22 44 30 Q44 38 38 40" stroke="#f57f17" stroke-width="1.5" fill="none"/>
+                <circle cx="29" cy="22" r="1.5" fill="#f57f17"/>
+                <circle cx="32" cy="20" r="1.5" fill="#f57f17"/>
+                <circle cx="35" cy="22" r="1.5" fill="#f57f17"/>
+                <circle cx="29" cy="27" r="1.5" fill="#f57f17"/>
+                <circle cx="32" cy="25" r="1.5" fill="#f57f17"/>
+                <circle cx="35" cy="27" r="1.5" fill="#f57f17"/>
+                <circle cx="29" cy="32" r="1.5" fill="#f57f17"/>
+                <circle cx="32" cy="30" r="1.5" fill="#f57f17"/>
+                <circle cx="35" cy="32" r="1.5" fill="#f57f17"/>
+                <path d="M28 44 Q32 48 36 44" stroke="#66bb6a" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="product-badge organic">Organic</span>
+          </div>
+          <div class="product-body">
+            <div class="product-farmer">Grown by Alhaji Fofanah</div>
+            <div class="product-name">Sweet Yellow Maize</div>
+            <div class="product-desc">Sun-ripened yellow maize from Makeni. Perfect for grinding into cornmeal, roasting, or animal feed. High-yield organic variety, harvested weekly.</div>
+            <div class="product-meta">
+              <span class="product-tag">Makeni</span>
+              <span class="product-tag">Organic</span>
+              <span class="product-tag">Weekly harvest</span>
+            </div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">NLe 55 <span>/ 10kg</span></div>
+            <button class="add-to-cart" onclick="addToCart(this, 'Sweet Yellow Maize', 55, 'maize', 'Alhaji Fofanah', '10kg')">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card fade-up" data-category="vegetables">
+          <div class="product-img veg">
+            <div class="product-img-inner">
+              <svg width="72" height="72" viewBox="0 0 64 64" fill="none">
+                <ellipse cx="32" cy="36" rx="14" ry="10" fill="#66bb6a"/>
+                <path d="M32 18 Q36 26 32 36 Q28 26 32 18Z" fill="#43a047"/>
+                <path d="M20 28 Q28 30 32 36 Q24 34 20 28Z" fill="#43a047"/>
+                <path d="M44 28 Q36 30 32 36 Q40 34 44 28Z" fill="#43a047"/>
+              </svg>
+            </div>
+            <span class="product-badge limited">Limited</span>
+          </div>
+          <div class="product-body">
+            <div class="product-farmer">Grown by Mariama Bangura</div>
+            <div class="product-name">Leafy Greens Bundle</div>
+            <div class="product-desc">Mixed bundle of fresh leafy vegetables including potato leaves, cassava leaves, and garden eggs. Harvested daily. Rich in vitamins A and C.</div>
+            <div class="product-meta">
+              <span class="product-tag">Bo District</span>
+              <span class="product-tag">Daily harvest</span>
+              <span class="product-tag">Vitamin-rich</span>
+            </div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">NLe 30 <span>/ bundle</span></div>
+            <button class="add-to-cart" onclick="addToCart(this, 'Leafy Greens Bundle', 30, 'veg', 'Mariama Bangura', 'bundle')">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card fade-up" data-category="vegetables">
+          <div class="product-img veg" style="background: linear-gradient(135deg, #fff8e1, #ffcc80);">
+            <div class="product-img-inner">
+              <svg width="72" height="72" viewBox="0 0 64 64" fill="none">
+                <ellipse cx="32" cy="36" rx="10" ry="14" fill="#ef9a9a"/>
+                <ellipse cx="32" cy="24" rx="6" ry="8" fill="#e53935"/>
+                <path d="M32 16 Q34 10 38 8" stroke="#43a047" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="product-badge organic">Organic</span>
+          </div>
+          <div class="product-body">
+            <div class="product-farmer">Grown by Mohamed Kamara</div>
+            <div class="product-name">Fresh Tomatoes</div>
+            <div class="product-desc">Firm, ripe tomatoes grown without pesticides in Bo District. Ideal for sauces, stews, and salads. Sourced directly from Ecofarm partner plots.</div>
+            <div class="product-meta">
+              <span class="product-tag">Bo District</span>
+              <span class="product-tag">No pesticides</span>
+            </div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">NLe 40 <span>/ 2kg tray</span></div>
+            <button class="add-to-cart" onclick="addToCart(this, 'Fresh Tomatoes', 40, 'veg', 'Mohamed Kamara', '2kg tray')">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card fade-up" data-category="oils">
+          <div class="product-img oil">
+            <div class="product-img-inner">
+              <svg width="72" height="72" viewBox="0 0 64 64" fill="none">
+                <rect x="24" y="20" width="16" height="28" rx="3" fill="#ce93d8"/>
+                <rect x="27" y="14" width="10" height="8" rx="2" fill="#ab47bc"/>
+                <path d="M28 28 Q32 32 36 28" stroke="#9c27b0" stroke-width="1.5" fill="none"/>
+                <path d="M28 34 Q32 38 36 34" stroke="#9c27b0" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <span class="product-badge seasonal">Traditional</span>
+          </div>
+          <div class="product-body">
+            <div class="product-farmer">Produced by Alhaji Fofanah</div>
+            <div class="product-name">Red Palm Oil</div>
+            <div class="product-desc">Cold-pressed red palm oil from organically grown oil palms in Makeni. Unrefined, rich in beta-carotene and natural antioxidants. Traditional extraction method.</div>
+            <div class="product-meta">
+              <span class="product-tag">Cold-pressed</span>
+              <span class="product-tag">Unrefined</span>
+              <span class="product-tag">Makeni</span>
+            </div>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">NLe 120 <span>/ 2L bottle</span></div>
+            <button class="add-to-cart" onclick="addToCart(this, 'Red Palm Oil', 120, 'oil', 'Alhaji Fofanah', '2L bottle')">Add to Cart</button>
+          </div>
+        </div>
+
+      </div><!-- /shop-grid -->
+
+      <!-- Order Tracking -->
+      <div class="order-track-box fade-up">
+        <div class="order-track-title">Track Your Order</div>
+        <div class="order-track-input-row">
+          <input class="order-track-input" id="trackInput" type="text" placeholder="Enter your order number (e.g. ECF-2026-00142)">
+          <button class="order-track-btn" onclick="trackOrder()">Track Order</button>
+        </div>
+        <div class="order-result" id="orderResult">
+          <div style="font-size:0.82rem; color:var(--text-mid); margin-bottom:1.2rem;">
+            Order <strong id="trackOrderNum" style="color:var(--green-deep)"></strong> —
+            <span id="trackOrderItem" style="font-weight:600;"></span> for
+            <strong id="trackOrderName" style="color:var(--green-deep)"></strong>
+          </div>
+          <div class="order-steps">
+            <div class="order-step done" id="step1">
+              <div class="order-step-dot">1</div>
+              <div class="order-step-label">Order Placed</div>
+            </div>
+            <div class="order-step done" id="step2">
+              <div class="order-step-dot">2</div>
+              <div class="order-step-label">Confirmed</div>
+            </div>
+            <div class="order-step current" id="step3">
+              <div class="order-step-dot">3</div>
+              <div class="order-step-label">Processing</div>
+            </div>
+            <div class="order-step" id="step4">
+              <div class="order-step-dot">4</div>
+              <div class="order-step-label">Dispatched</div>
+            </div>
+            <div class="order-step" id="step5">
+              <div class="order-step-dot">5</div>
+              <div class="order-step-label">Delivered</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <div class="cart-title">Your Cart</div>
+      <div style="display:flex;align-items:center;gap:0.8rem;">
+        <span class="cart-count-badge" id="cartBadge">0 items</span>
+        <button class="cart-close" onclick="toggleCart()">&times;</button>
+      </div>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">Your cart is empty.<br>Add some fresh produce to get started.</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span class="cart-subtotal-label">Subtotal</span>
+        <span class="cart-subtotal-val" id="cartTotal">NLe 0</span>
+      </div>
+      <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+      <p class="cart-note">Demo mode — no real payment will be processed</p>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="checkout-overlay" id="checkoutOverlay">
+    <div class="checkout-modal">
+      <div class="checkout-modal-header">
+        <div class="checkout-modal-title">Checkout</div>
+        <button class="checkout-modal-close" onclick="closeCheckout()">&times;</button>
+      </div>
+      <div id="checkoutForm">
+        <div class="checkout-modal-body">
+          <div style="font-size:0.75rem; font-weight:600; color:var(--text-mid); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;">Order Summary</div>
+          <div class="checkout-summary" id="checkoutSummary"></div>
+          <div style="font-size:0.75rem; font-weight:600; color:var(--text-mid); letter-spacing:0.1em; text-transform:uppercase; margin:1.2rem 0 0.8rem;">Delivery Details</div>
+          <div class="checkout-form-row">
+            <div class="checkout-form-group"><label class="checkout-label">First Name</label><input class="checkout-input" id="ckFname" placeholder="Aminata"></div>
+            <div class="checkout-form-group"><label class="checkout-label">Last Name</label><input class="checkout-input" id="ckLname" placeholder="Koroma"></div>
+          </div>
+          <div class="checkout-form-group"><label class="checkout-label">Phone Number</label><input class="checkout-input" id="ckPhone" placeholder="+232 XX XXX XXXX"></div>
+          <div class="checkout-form-group"><label class="checkout-label">Delivery Address</label><input class="checkout-input" id="ckAddress" placeholder="Street, City, District"></div>
+          <div class="checkout-form-group">
+            <label class="checkout-label">Delivery Option</label>
+            <select class="checkout-input" id="ckDelivery">
+              <option>Standard Delivery (2–3 days) — Free</option>
+              <option>Express Delivery (Next day) — NLe 25</option>
+              <option>Pickup from Farm — Free</option>
+            </select>
+          </div>
+          <button class="checkout-place-btn" onclick="placeOrder()">Place Order (Demo)</button>
+        </div>
+      </div>
+      <div class="checkout-success" id="checkoutSuccess">
+        <div class="checkout-success-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="28" fill="#e8f5e9"/><path d="M16 28l8 8 16-16" stroke="#2e7d32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="checkout-success-title">Order Placed!</div>
+        <div class="checkout-success-order">
+          Your order number is <strong id="successOrderNum"></strong>.<br>
+          You will receive a confirmation call within 2 hours.<br><br>
+          <strong>Delivery: 2–3 business days</strong><br>
+          Thank you for supporting Eco-Farm partner farmers.
+        </div>
+        <button class="checkout-place-btn" style="margin-top:1.5rem;" onclick="closeCheckout()">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
 
   <!-- CTA -->
   <section id="cta">
@@ -885,6 +2522,81 @@
     </div>
   </footer>
 
+  <!-- Firebase SDK (Audit Logging) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // =====================================================
+    // FIREBASE CONFIGURATION
+    // Replace ALL values below with your own from:
+    // Firebase Console → Project Settings → Your Apps → Web
+    // =====================================================
+    const firebaseConfig = {
+      apiKey:            "YOUR_API_KEY",
+      authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId:         "YOUR_PROJECT_ID",
+      storageBucket:     "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId:             "YOUR_APP_ID"
+    };
+    // =====================================================
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    // Generate a unique session ID for this browser visit
+    window._sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+
+    // Core audit logger — write-only, permanent, cannot be deleted from frontend
+    window.auditLog = async function(eventType, details = {}) {
+      try {
+        await addDoc(collection(db, 'audit_logs'), {
+          eventType,
+          details,
+          timestamp:   serverTimestamp(),
+          userAgent:   navigator.userAgent,
+          language:    navigator.language,
+          screenSize:  screen.width + 'x' + screen.height,
+          url:         window.location.href,
+          sessionId:   window._sessionId,
+        });
+      } catch (err) {
+        console.warn('Audit log write failed:', err.message);
+      }
+    };
+
+    // 1. LOG PAGE VISIT on load
+    window.auditLog('PAGE_VISIT', {
+      page:     document.title,
+      referrer: document.referrer || 'direct',
+    });
+
+    // 2. LOG SECTION NAVIGATION — fires when user scrolls into each section
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          window.auditLog('SECTION_VIEW', { section: entry.target.id });
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
+
+  </script>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // ─────────────────────────────────────────────────────
+    // EMAILJS CONFIGURATION — swap these 3 values in
+    // ─────────────────────────────────────────────────────
+    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';     // Account → Public Key
+    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';     // Email Services → Service ID
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';    // Email Templates → Template ID
+    // ─────────────────────────────────────────────────────
+
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  </script>
   <script>
     // Intersection Observer for fade-up animations
     const observer = new IntersectionObserver((entries) => {
@@ -914,23 +2626,372 @@
       });
     });
 
-    // Contact form
+    // ── CONTACT FORM (EmailJS) ──
     function submitForm() {
-      const fname = document.getElementById('fname').value;
-      const email = document.getElementById('email').value;
-      if (!fname || !email) {
-        alert('Please fill in your name and email.');
+      const fname   = document.getElementById('fname').value.trim();
+      const lname   = document.getElementById('lname').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const role    = document.getElementById('role').value;
+      const message = document.getElementById('message').value.trim();
+      const btn     = document.querySelector('.form-submit');
+      const success = document.getElementById('form-success');
+
+      if (!fname || !email || !message) {
+        alert('Please fill in your first name, email, and message.');
         return;
       }
-      document.getElementById('form-success').style.display = 'block';
-      document.querySelector('.form-submit').disabled = true;
-      document.querySelector('.form-submit').textContent = 'Sent ✓';
+
+      // Show sending state
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const templateParams = {
+        from_name : fname + ' ' + lname,
+        from_email: email,
+        user_role : role || 'Not specified',
+        message   : message,
+        reply_to  : email,
+      };
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+        .then(() => {
+          success.style.display = 'block';
+          success.innerHTML = 'Message sent! We\'ll be in touch shortly.';
+          success.style.background = '#e8f5e9';
+          success.style.color = '#2e7d32';
+          btn.textContent = 'Sent';
+          // Audit log: contact form submission
+          if (window.auditLog) window.auditLog('CONTACT_FORM_SUBMITTED', {
+            name:  templateParams.from_name,
+            email: templateParams.from_email,
+            role:  templateParams.user_role,
+          });
+          // Clear form fields
+          ['fname','lname','email','message'].forEach(id => document.getElementById(id).value = '');
+          document.getElementById('role').selectedIndex = 0;
+        })
+        .catch((error) => {
+          console.error('EmailJS error:', error);
+          success.style.display = 'block';
+          success.innerHTML = 'Something went wrong. Please try again or email us directly.';
+          success.style.background = '#fff3e0';
+          success.style.color = '#e65100';
+          btn.disabled = false;
+          btn.textContent = 'Send Message →';
+        });
+    }
+
+
+
+    // ══════════════════════════════════════════
+    // INVEST NOW DROPDOWN
+    // ══════════════════════════════════════════
+    function toggleInvest() {
+      const panel    = document.getElementById('investPanel');
+      const btn      = document.getElementById('investBtn');
+      const backdrop = document.getElementById('investBackdrop');
+      const isOpen   = panel.classList.contains('open');
+      if (isOpen) {
+        closeInvest();
+      } else {
+        panel.classList.add('open');
+        btn.classList.add('open');
+        backdrop.classList.add('open');
+      }
+    }
+
+    function closeInvest() {
+      document.getElementById('investPanel').classList.remove('open');
+      document.getElementById('investBtn').classList.remove('open');
+      document.getElementById('investBackdrop').classList.remove('open');
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeInvest();
+    });
+
+    function submitInvestInterest() {
+      const name    = document.getElementById('invFname').value.trim();
+      const email   = document.getElementById('invEmail').value.trim();
+      const phone   = document.getElementById('invPhone').value.trim();
+      const range   = document.getElementById('invRange').value;
+      if (!name || !email || !phone || !range) {
+        alert('Please fill in your name, email, phone, and investment range.');
+        return;
+      }
+      // Show success
+      document.getElementById('investSuccess').style.display = 'block';
+      document.querySelector('.invest-submit').disabled = true;
+      document.querySelector('.invest-submit').textContent = 'Submitted';
+      // Audit log if Firebase is connected
+      if (window.auditLog) window.auditLog('INVESTOR_SIGNUP', {
+        name, email, phone,
+        investmentRange: range,
+        crop: document.getElementById('invCrop').value,
+        source: document.getElementById('invSource').value,
+      });
+    }
+
+    // ══════════════════════════════════════════
+    // FARM SHOP — Cart, Checkout, Filter, Track
+    // ══════════════════════════════════════════
+    let cart = [];
+
+    function addToCart(btn, name, price, imgClass, farmer, unit) {
+      const existing = cart.find(i => i.name === name);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ name, price, imgClass, farmer, unit, qty: 1 });
+      }
+      btn.textContent = 'Added';
+      btn.classList.add('added');
+      setTimeout(() => { btn.textContent = 'Add to Cart'; btn.classList.remove('added'); }, 1500);
+      updateCart();
+      // Flash open cart
+      const drawer = document.getElementById('cartDrawer');
+      if (!drawer.classList.contains('open')) {
+        document.getElementById('cartOverlay').classList.add('open');
+        drawer.classList.add('open');
+      }
+    }
+
+    function updateCart() {
+      const total    = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const count    = cart.reduce((s, i) => s + i.qty, 0);
+      const itemsEl  = document.getElementById('cartItems');
+      const emptyEl  = document.getElementById('cartEmpty');
+      document.getElementById('cartNavCount').textContent = count;
+      document.getElementById('cartBadge').textContent = count + (count === 1 ? ' item' : ' items');
+      document.getElementById('cartTotal').textContent = 'NLe ' + total.toLocaleString();
+
+      if (cart.length === 0) {
+        emptyEl.style.display = 'block';
+        // Remove all cart items except empty div
+        Array.from(itemsEl.children).forEach(c => { if (c !== emptyEl) c.remove(); });
+        return;
+      }
+      emptyEl.style.display = 'none';
+      // Rebuild cart items
+      Array.from(itemsEl.querySelectorAll('.cart-item')).forEach(c => c.remove());
+      cart.forEach((item, idx) => {
+        const bgMap = { rice:'#e8f5e9', cassava:'#fff8e1', maize:'#fff3e0', veg:'#e8f5e9', oil:'#f3e5f5' };
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <div class="cart-item-icon" style="background:${bgMap[item.imgClass] || '#f5f5f5'}">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1.8"><path d="M12 2C12 2 7 7 7 13a5 5 0 0010 0c0-6-5-10-5-10z"/><path d="M12 13v6"/></svg>
+          </div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-farmer">${item.farmer} · ${item.unit}</div>
+            <div class="cart-item-qty">
+              <button class="qty-btn" onclick="changeQty(${idx}, -1)">&#8722;</button>
+              <span class="qty-num">${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty(${idx}, 1)">+</button>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem;">
+            <div class="cart-item-price">NLe ${(item.price * item.qty).toLocaleString()}</div>
+            <button class="cart-item-remove" onclick="removeItem(${idx})">&#215;</button>
+          </div>
+        `;
+        itemsEl.appendChild(div);
+      });
+    }
+
+    function changeQty(idx, delta) {
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      updateCart();
+    }
+
+    function removeItem(idx) {
+      cart.splice(idx, 1);
+      updateCart();
+    }
+
+    function toggleCart() {
+      document.getElementById('cartOverlay').classList.toggle('open');
+      document.getElementById('cartDrawer').classList.toggle('open');
+    }
+
+    function openCheckout() {
+      if (cart.length === 0) { alert('Your cart is empty.'); return; }
+      const summary = document.getElementById('checkoutSummary');
+      let html = '';
+      cart.forEach(i => {
+        html += `<div class="checkout-summary-row"><span>${i.name} x${i.qty}</span><span>NLe ${(i.price*i.qty).toLocaleString()}</span></div>`;
+      });
+      const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+      html += `<div class="checkout-summary-row total"><span>Total</span><span>NLe ${total.toLocaleString()}</span></div>`;
+      summary.innerHTML = html;
+      document.getElementById('checkoutForm').style.display = 'block';
+      document.getElementById('checkoutSuccess').style.display = 'none';
+      document.getElementById('checkoutOverlay').classList.add('open');
+      document.getElementById('cartOverlay').classList.remove('open');
+      document.getElementById('cartDrawer').classList.remove('open');
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkoutOverlay').classList.remove('open');
+    }
+
+    function placeOrder() {
+      const fname = document.getElementById('ckFname').value.trim();
+      const phone = document.getElementById('ckPhone').value.trim();
+      const addr  = document.getElementById('ckAddress').value.trim();
+      if (!fname || !phone || !addr) { alert('Please fill in your name, phone and address.'); return; }
+      const orderNum = 'ECF-2026-' + String(Math.floor(10000 + Math.random()*90000));
+      document.getElementById('successOrderNum').textContent = orderNum;
+      document.getElementById('checkoutForm').style.display = 'none';
+      document.getElementById('checkoutSuccess').style.display = 'block';
+      cart = [];
+      updateCart();
+    }
+
+    function filterProducts(cat, btn) {
+      document.querySelectorAll('.shop-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.product-card').forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+      });
+    }
+
+    function searchProducts(val) {
+      const q = val.toLowerCase();
+      document.querySelectorAll('.product-card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    function trackOrder() {
+      const val = document.getElementById('trackInput').value.trim();
+      if (!val) { alert('Please enter an order number.'); return; }
+      // Demo — show a sample tracking result
+      const demoOrders = {
+        'ECF-2026-00142': { name:'Sarah Kamara', item:'Local White Rice x2', step:3 },
+        'ECF-2026-00138': { name:'David Conteh',  item:'Fresh Cassava x1',    step:4 },
+        'ECF-2026-00125': { name:'Fatima Sesay',  item:'Red Palm Oil x1',     step:5 },
+      };
+      const upper = val.toUpperCase();
+      const order = demoOrders[upper] || { name: val.split('-').pop() || 'Customer', item: 'Order item', step: 2 };
+      document.getElementById('trackOrderNum').textContent  = upper;
+      document.getElementById('trackOrderItem').textContent = order.item;
+      document.getElementById('trackOrderName').textContent = order.name;
+      // Reset steps
+      for (let i = 1; i <= 5; i++) {
+        const s = document.getElementById('step' + i);
+        s.className = 'order-step';
+        if (i < order.step)  s.className = 'order-step done';
+        if (i === order.step) s.className = 'order-step current';
+      }
+      document.getElementById('orderResult').style.display = 'block';
+    }
+
+    // ── DASHBOARD ──
+    function dashLogin() {
+      const name = document.getElementById('loginName').value.trim();
+      const pin  = document.getElementById('loginPin').value.trim();
+      if (!name) { alert('Please enter your Farmer ID or name.'); return; }
+      if (pin !== '1234') { alert('Incorrect PIN. Demo PIN is 1234.'); return; }
+      document.getElementById('dashGate').style.display = 'none';
+      const main = document.getElementById('dashMain');
+      main.classList.add('active');
+      // Set avatar & name
+      const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+      document.getElementById('dashAvatar').textContent = initials;
+      document.getElementById('dashName').textContent = name;
+      // Set today's date in log form
+      document.getElementById('logDate').valueAsDate = new Date();
+      // Audit log: farmer dashboard login
+      if (window.auditLog) window.auditLog('FARMER_LOGIN', {
+        farmerName: name,
+        loginTime:  new Date().toISOString(),
+      });
+      main.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function dashLogout() {
+      // Audit log: farmer dashboard logout
+      const farmerName = document.getElementById('dashName').textContent;
+      if (window.auditLog) window.auditLog('FARMER_LOGOUT', {
+        farmerName,
+        logoutTime: new Date().toISOString(),
+      });
+      document.getElementById('dashMain').classList.remove('active');
+      document.getElementById('dashGate').style.display = 'block';
+      document.getElementById('loginName').value = '';
+      document.getElementById('loginPin').value = '';
+    }
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    const cropData = {
+      rice:       { name:'Rice (Lowland)',    plot:'2.0 acres — Block A', planted:'Oct 15, 2025', harvest:'Jan 28, 2026', yield:'1.8 tonnes', fert:'Urea — 2nd round due',  status:'active',  yieldPct:'78%', yieldW:78, advice:'Rice field performing above regional average. Maintain current irrigation and apply 2nd urea round within 72 hours.' },
+      cassava:    { name:'Cassava',           plot:'1.5 acres — Block B', planted:'Sep 1, 2025',  harvest:'Jun 1, 2026',  yield:'3.2 tonnes', fert:'Compost — applied',     status:'active',  yieldPct:'44%', yieldW:44, advice:'Cassava is on track. Apply mulch around stems during dry spells to retain soil moisture.' },
+      maize:      { name:'Maize',             plot:'0.8 acres — Block C', planted:'Nov 1, 2025',  harvest:'Feb 28, 2026', yield:'0.6 tonnes', fert:'NPK — completed',       status:'pending', yieldPct:'88%', yieldW:88, advice:'Maize nearing harvest. Monitor for ear rot. Harvest within 2 weeks for optimal quality.' },
+      groundnuts: { name:'Groundnuts',        plot:'0.5 acres — Block D', planted:'Nov 20, 2025', harvest:'Mar 15, 2026', yield:'0.4 tonnes', fert:'Rhizobium inoculant',   status:'active',  yieldPct:'55%', yieldW:55, advice:'Groundnuts showing healthy nodulation. No additional nitrogen needed — legume is self-sufficient.' },
+      vegetables: { name:'Vegetables (Leafy)',plot:'0.3 acres — Block E', planted:'Jan 5, 2026',  harvest:'Mar 5, 2026',  yield:'0.15 tonnes',fert:'Foliar spray — weekly', status:'active',  yieldPct:'60%', yieldW:60, advice:'Vegetable batch performing well. Harvest batch #4 due this week. Replant immediately for next cycle.' },
+      cocoa:      { name:'Cocoa & Oil Palm',  plot:'1.2 acres — Block F', planted:'Jan 1, 2024',  harvest:'Dec 2026',     yield:'0.9 tonnes', fert:'Potassium — seasonal',  status:'active',  yieldPct:'35%', yieldW:35, advice:'Perennial crop in pod development stage. Prune excess canopy to improve light penetration and pod set.' },
+    };
+
+    function selectCrop(btn, key) {
+      document.querySelectorAll('.crop-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const d = cropData[key];
+      document.getElementById('cropDetailName').textContent = d.name;
+      document.getElementById('cropPlot').textContent      = d.plot;
+      document.getElementById('cropPlanted').textContent   = d.planted;
+      document.getElementById('cropHarvest').textContent   = d.harvest;
+      document.getElementById('cropYield').textContent     = d.yield;
+      document.getElementById('cropFert').textContent      = d.fert;
+      document.getElementById('cropStatus').textContent    = d.status === 'active' ? 'Active' : 'Pending';
+      document.getElementById('cropStatus').className      = 'status-pill ' + d.status;
+      document.getElementById('yieldPct').textContent      = d.yieldPct;
+      document.getElementById('yieldBar').style.width      = d.yieldW + '%';
+      document.getElementById('cropAdvice').innerHTML      = '<strong>Agritech Advice:</strong> ' + d.advice;
+    }
+
+    function submitLog() {
+      const date  = document.getElementById('logDate').value;
+      const hours = document.getElementById('logHours').value;
+      if (!date || !hours) { alert('Please enter date and hours worked.'); return; }
+      const btn = document.querySelector('.crop-log-submit');
+      btn.disabled = true; btn.textContent = 'Logged';
+      // Audit log: farmer field activity logged
+      if (window.auditLog) window.auditLog('FIELD_ACTIVITY_LOGGED', {
+        farmerName:   document.getElementById('dashName').textContent,
+        date:         document.getElementById('logDate').value,
+        crop:         document.getElementById('logCrop').value,
+        activityType: document.getElementById('logType').value,
+        hoursWorked:  document.getElementById('logHours').value,
+        notes:        document.getElementById('logNotes').value,
+      });
+      document.getElementById('logSuccess').style.display = 'block';
+      setTimeout(() => {
+        btn.disabled = false; btn.textContent = 'Submit Activity Log →';
+        document.getElementById('logSuccess').style.display = 'none';
+        document.getElementById('logNotes').value = '';
+        document.getElementById('logHours').value = '';
+      }, 3000);
     }
 
     // Crop chip interaction
     document.querySelectorAll('.crop-chip').forEach(chip => {
       chip.addEventListener('click', () => {
-        document.querySelectorAll('.crop-chip').forEach(c => c.style.background = '');
+        document.querySelectorAll('.crop-chip').forEach(c => {
+          c.style.background = '';
+          c.style.color = '';
+          c.style.borderColor = '';
+        });
         chip.style.background = 'var(--green-deep)';
         chip.style.color = 'var(--cream)';
         chip.style.borderColor = 'var(--green-deep)';
