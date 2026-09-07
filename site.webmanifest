@@ -1,0 +1,17 @@
+{
+  "name": "Ecofarms Limited",
+  "short_name": "Ecofarms",
+  "description": "Produce. Partner. Connect.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fffdf7",
+  "theme_color": "#173e2a",
+  "icons": [
+    {
+      "src": "assets/ecofarms-logo.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
