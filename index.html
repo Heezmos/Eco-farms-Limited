@@ -51,8 +51,8 @@
         <span></span><span></span><span></span><b>Menu</b>
       </button>
       <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation" data-nav>
-        <a href="#about">About</a><a href="#pillars">Our Model</a><a href="#products">Products</a><a href="#partners">Farmers</a><a href="#supply">Buyers</a>
-        <a class="nav-cta" href="#supply">Request supply</a>
+        <a href="#about">About</a><a href="#pillars">Our Model</a><a href="#market">Ecofarms Market</a><a href="#partners">Farmers</a><a href="#supply">Buyers</a>
+        <a class="nav-cta" href="#market">Shop the market</a>
       </nav>
     </header>
 
@@ -62,7 +62,7 @@
           <p class="eyebrow">Integrated agribusiness · Sierra Leone</p>
           <h1>Reliable food supply begins with <em>better connections.</em></h1>
           <p>Ecofarms brings production, partner farmers and market demand into one disciplined agricultural supply network.</p>
-          <div class="hero-actions"><a class="button gold" href="#supply">Request agricultural supply</a><a class="button ghost" href="#partners">Join our farmer network</a></div>
+          <div class="hero-actions"><a class="button gold" href="#market">Shop Ecofarms Market</a><a class="button ghost" href="#partners">Join our farmer network</a></div>
           <div class="trust-line"><span>Demand-led planning</span><span>Quality standards</span><span>Traceable supply</span></div>
         </div>
         <div class="hero-mark reveal">
@@ -92,15 +92,35 @@
         </div>
       </section>
 
-      <section class="section products" id="products">
-        <div class="section-heading reveal"><p class="eyebrow">Initial product focus</p><h2>Focused products, transparent sourcing.</h2><p>Availability will grow only when production economics and reliable demand support expansion.</p></div>
-        <div class="product-grid" data-products><p class="loading">Loading the Ecofarms catalogue…</p></div>
+      <section class="section products market" id="market">
+        <div class="section-heading reveal"><p class="eyebrow">Ecofarms Market</p><h2>Trusted agricultural products, ready for your demand.</h2><p>Browse management-approved products, build a supply basket and send one structured order request to our commercial team.</p></div>
+        <div class="market-tools reveal"><label><span class="sr-only">Search products</span><input type="search" placeholder="Search products…" data-market-search /></label><label><span class="sr-only">Filter category</span><select data-market-category><option value="">All categories</option></select></label><button class="button green cart-button" type="button" data-cart-open>Basket <span data-cart-count>0</span></button></div>
+        <div class="product-grid market-grid" data-products><p class="loading">Loading Ecofarms Market…</p></div>
         <div class="identity-grid reveal">
           <div><b>Ecofarms Grown</b><span>Produced directly under Ecofarms management.</span></div>
           <div><b>Ecofarms Partner</b><span>Supplied through registered partner farmers.</span></div>
           <div><b>Ecofarms Verified</b><span>Approved third-party supply meeting our requirements.</span></div>
         </div>
       </section>
+      <dialog class="market-dialog" data-cart-dialog>
+        <div class="dialog-head"><div><p class="eyebrow">Your supply basket</p><h2>Request an Ecofarms order</h2></div><button type="button" class="dialog-close" data-cart-close aria-label="Close basket">×</button></div>
+        <div class="cart-items" data-cart-items></div>
+        <form class="market-order-form" data-form="market" novalidate>
+          <div class="field-grid">
+            <label>Organization or customer name *<input name="organization_name" required minlength="2" maxlength="160" /></label>
+            <label>Contact person *<input name="contact_name" autocomplete="name" required minlength="2" maxlength="120" /></label>
+            <label>Phone number *<input name="phone" type="tel" autocomplete="tel" required minlength="7" maxlength="30" /></label>
+            <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" /></label>
+            <label>Buyer type *<select name="buyer_segment" required><option value="">Select buyer type</option><option value="hotel_restaurant_caterer">Hotel, restaurant or caterer</option><option value="supermarket_retailer">Supermarket or retailer</option><option value="wholesaler_processor">Wholesaler or processor</option><option value="institution">School, NGO, government or institution</option><option value="household">Household</option><option value="other">Other</option></select></label>
+            <label>Delivery location *<input name="delivery_location" required minlength="2" maxlength="240" /></label>
+            <label>Supply frequency *<select name="frequency" required><option value="one_time">One-time order</option><option value="weekly">Weekly</option><option value="fortnightly">Every two weeks</option><option value="monthly">Monthly</option></select></label>
+            <label>Required from<input name="required_from" type="date" /></label>
+          </div>
+          <label>Additional requirements<textarea name="notes" rows="3" maxlength="2000" placeholder="Quality, packaging or delivery instructions"></textarea></label>
+          <p class="privacy-note">This is an order request, not an automatic payment. Ecofarms will confirm price, availability and delivery before the order becomes binding.</p>
+          <button class="button gold submit" type="submit">Send order request</button><div class="form-message" role="status" aria-live="polite"></div>
+        </form>
+      </dialog>
 
       <section class="section partner-section" id="partners">
         <div class="form-intro reveal"><p class="eyebrow">Partner with Ecofarms</p><h2>Join the Ecofarms Partner Farmer Network.</h2><p>Build a verified commercial record, receive market information and participate in production planning, aggregation and supply opportunities.</p>
@@ -149,6 +169,6 @@
       </section>
     </main>
 
-    <footer><div class="footer-brand"><img src="assets/ecofarms-logo.webp?v=1" alt="" /><div><strong>Ecofarms Limited</strong><span>Produce. Partner. Connect.</span></div></div><p>An integrated agribusiness strengthening the connection between food production, farmers and markets in Sierra Leone.</p><div><a href="#partners">Farmer application</a><a href="#supply">Supply request</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Website terms</a><span>Freetown, Sierra Leone</span></div><small>© <span data-year></span> Ecofarms Limited. All rights reserved.</small></footer>
+    <footer><div class="footer-brand"><img src="assets/ecofarms-logo.webp?v=1" alt="" /><div><strong>Ecofarms Limited</strong><span>Produce. Partner. Connect.</span></div></div><p>An integrated agribusiness strengthening the connection between food production, farmers and markets in Sierra Leone.</p><div><a href="#partners">Farmer application</a><a href="#market">Ecofarms Market</a><a href="#supply">Custom supply request</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Website terms</a><span>Freetown, Sierra Leone</span></div><small>© <span data-year></span> Ecofarms Limited. All rights reserved.</small></footer>
   </body>
 </html>

@@ -1,117 +1,51 @@
 const SUPABASE_URL = "https://qeabpfnmifrgqoyqazcz.supabase.co";
 const SUPABASE_KEY = "sb_publishable_i0ZKnFQFcVEKxb6E2VyIqA_jSI1-n-8";
-
 const headers = { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" };
-const analyticsSession = (() => {
-  try {
-    const existing = sessionStorage.getItem("ecofarms_analytics_session");
-    if (existing) return existing;
-    const created = crypto.randomUUID();
-    sessionStorage.setItem("ecofarms_analytics_session", created);
-    return created;
-  } catch {
-    return crypto.randomUUID();
-  }
-})();
-const referrerHost = (() => {
-  try { return document.referrer ? new URL(document.referrer).hostname : null; }
-  catch { return null; }
-})();
-function track(event_name, details = {}) {
-  const payload = {
-    session_id: analyticsSession,
-    event_name,
-    page_path: location.pathname.slice(0, 300) || "/",
-    section: details.section?.slice(0, 80) || null,
-    target: details.target?.slice(0, 160) || null,
-    referrer_host: referrerHost,
-  };
-  void fetch(`${SUPABASE_URL}/rest/v1/eco_website_events`, {
-    method: "POST",
-    headers: { ...headers, Prefer: "return=minimal" },
-    body: JSON.stringify(payload),
-    keepalive: true,
-  }).catch(() => {});
+const analyticsSession=(()=>{try{const old=sessionStorage.getItem("ecofarms_analytics_session");if(old)return old;const id=crypto.randomUUID();sessionStorage.setItem("ecofarms_analytics_session",id);return id}catch{return crypto.randomUUID()}})();
+const referrerHost=(()=>{try{return document.referrer?new URL(document.referrer).hostname:null}catch{return null}})();
+function track(event_name,details={}){void fetch(`${SUPABASE_URL}/rest/v1/eco_website_events`,{method:"POST",headers:{...headers,Prefer:"return=minimal"},body:JSON.stringify({session_id:analyticsSession,event_name,page_path:location.pathname.slice(0,300)||"/",section:details.section?.slice(0,80)||null,target:details.target?.slice(0,160)||null,referrer_host:referrerHost}),keepalive:true}).catch(()=>{})}
+document.querySelector("[data-year]").textContent=new Date().getFullYear();
+const menuButton=document.querySelector("[data-menu-button]"),nav=document.querySelector("[data-nav]");
+menuButton.addEventListener("click",()=>{const open=nav.classList.toggle("open");menuButton.setAttribute("aria-expanded",String(open))});
+nav.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{nav.classList.remove("open");menuButton.setAttribute("aria-expanded","false")}));
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting&&entry.target.classList.add("visible")),{threshold:.08});document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+const sourcing=value=>({ecofarms_grown:"Ecofarms Grown",ecofarms_partner:"Ecofarms Partner",ecofarms_verified:"Ecofarms Verified"})[value]||value;
+const money=value=>new Intl.NumberFormat("en-SL",{style:"currency",currency:"SLE",maximumFractionDigits:0}).format(value);
+function escapeHtml(value){const node=document.createElement("div");node.textContent=String(value??"");return node.innerHTML}
+function clean(value){const text=String(value??"").trim();return text||null}
+function numberOrNull(value){return value===""?null:Number(value)}
+function showMessage(form,type,text){const box=form.querySelector(".form-message");box.className=`form-message ${type}`;box.textContent=text}
+async function submitRecord(table,payload){const response=await fetch(`${SUPABASE_URL}/rest/v1/${table}`,{method:"POST",headers:{...headers,Prefer:"return=minimal"},body:JSON.stringify(payload)});if(!response.ok)throw new Error("Submission failed")}
+function reference(prefix){return `${prefix}-${crypto.randomUUID().replaceAll("-","").slice(0,10).toUpperCase()}`}
+
+let products=[],basket=new Map();
+const productGrid=document.querySelector("[data-products]"),search=document.querySelector("[data-market-search]"),category=document.querySelector("[data-market-category]");
+async function loadProducts(){
+ try{const response=await fetch(`${SUPABASE_URL}/rest/v1/eco_products?select=id,name,category,sourcing_identity,unit,description,public_price,availability_status,minimum_order_quantity,image_url,is_featured&is_active=eq.true&order=is_featured.desc,name.asc`,{headers});if(!response.ok)throw new Error();products=await response.json();
+  [...new Set(products.map(p=>p.category))].sort().forEach(name=>category.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(name)}">${escapeHtml(name.replaceAll("_"," "))}</option>`));renderProducts();
+ }catch{productGrid.innerHTML='<p class="loading">Ecofarms Market is temporarily unavailable. Please use the custom supply request below.</p>'}
 }
-
-document.querySelector("[data-year]").textContent = new Date().getFullYear();
-const menuButton = document.querySelector("[data-menu-button]");
-const nav = document.querySelector("[data-nav]");
-menuButton.addEventListener("click", () => { const open = nav.classList.toggle("open"); menuButton.setAttribute("aria-expanded", String(open)); });
-nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { nav.classList.remove("open"); menuButton.setAttribute("aria-expanded", "false"); }));
-
-const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")), { threshold: 0.08 });
-document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
-
-const label = (value) => ({ ecofarms_grown: "Ecofarms Grown", ecofarms_partner: "Ecofarms Partner", ecofarms_verified: "Ecofarms Verified" })[value] || value;
-
-async function loadProducts() {
-  const container = document.querySelector("[data-products]");
-  try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/eco_products?select=name,category,sourcing_identity,unit,description&is_active=eq.true&order=name.asc`, { headers });
-    if (!response.ok) throw new Error("Catalogue unavailable");
-    const products = await response.json();
-    container.innerHTML = products.map((product) => `<article class="product-card" data-product="${escapeHtml(product.name)}"><span class="category">${escapeHtml(product.category.replaceAll("_", " "))}</span><h3>${escapeHtml(product.name)}</h3><p>${escapeHtml(product.description || "Available according to production and supply planning.")}</p><small>${escapeHtml(label(product.sourcing_identity))} · per ${escapeHtml(product.unit)}</small></article>`).join("");
-  } catch {
-    container.innerHTML = '<p class="loading">Our catalogue is temporarily unavailable. Please use the supply request form or contact Ecofarms directly.</p>';
-  }
+function renderProducts(){
+ const term=search.value.trim().toLowerCase(),selected=category.value;const filtered=products.filter(p=>(!selected||p.category===selected)&&(!term||[p.name,p.description,p.category].join(" ").toLowerCase().includes(term)));
+ productGrid.innerHTML=filtered.length?filtered.map(p=>`<article class="product-card market-card" data-product="${escapeHtml(p.name)}">
+  <div class="product-image">${p.image_url?`<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}" loading="lazy">`:'<span>Ecofarms</span>'}</div>
+  <div class="product-body"><div class="product-top"><span class="category">${escapeHtml(p.category.replaceAll("_"," "))}</span><span class="availability ${escapeHtml(p.availability_status)}">${escapeHtml(p.availability_status.replaceAll("_"," "))}</span></div>
+  <h3>${escapeHtml(p.name)}</h3><p>${escapeHtml(p.description||"Available according to production and supply planning.")}</p><small>${escapeHtml(sourcing(p.sourcing_identity))} · per ${escapeHtml(p.unit)}</small>
+  <div class="product-buy"><strong>${p.public_price==null?"Request quotation":money(p.public_price)}</strong><button type="button" class="button green" data-add="${p.id}" ${p.availability_status==="unavailable"?"disabled":""}>${p.availability_status==="unavailable"?"Unavailable":"Add to basket"}</button></div></div></article>`).join(""):'<p class="loading">No products match this search.</p>';
+ productGrid.querySelectorAll("[data-add]").forEach(button=>button.addEventListener("click",()=>addToBasket(button.dataset.add)));
 }
+function addToBasket(id){const product=products.find(p=>p.id===id);if(!product)return;const current=basket.get(id);basket.set(id,{...product,quantity:current?current.quantity+Number(product.minimum_order_quantity):Number(product.minimum_order_quantity)});renderBasket();track("market_add_to_basket",{section:"market",target:product.name})}
+function renderBasket(){document.querySelector("[data-cart-count]").textContent=String(basket.size);const box=document.querySelector("[data-cart-items]");const items=[...basket.values()];box.innerHTML=items.length?items.map(p=>`<div class="cart-row"><div><b>${escapeHtml(p.name)}</b><small>${p.public_price==null?"Quotation required":money(p.public_price)+" per "+escapeHtml(p.unit)}</small></div><label>Quantity<input data-quantity="${p.id}" type="number" min="${p.minimum_order_quantity}" step="any" value="${p.quantity}"></label><button type="button" data-remove="${p.id}" aria-label="Remove ${escapeHtml(p.name)}">Remove</button></div>`).join(""):'<p class="empty-cart">Your basket is empty. Add products from Ecofarms Market.</p>';box.querySelectorAll("[data-quantity]").forEach(input=>input.addEventListener("change",()=>{const item=basket.get(input.dataset.quantity);if(item)item.quantity=Math.max(Number(input.value),Number(item.minimum_order_quantity))}));box.querySelectorAll("[data-remove]").forEach(button=>button.addEventListener("click",()=>{basket.delete(button.dataset.remove);renderBasket()}))}
+search.addEventListener("input",renderProducts);category.addEventListener("change",renderProducts);
+const dialog=document.querySelector("[data-cart-dialog]");document.querySelector("[data-cart-open]").addEventListener("click",()=>{renderBasket();dialog.showModal();track("market_basket_open",{section:"market"})});document.querySelector("[data-cart-close]").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close()});
 
-function escapeHtml(value) { const node = document.createElement("div"); node.textContent = String(value); return node.innerHTML; }
-function clean(value) { const text = value.trim(); return text || null; }
-function numberOrNull(value) { return value === "" ? null : Number(value); }
-function showMessage(form, type, text) { const box = form.querySelector(".form-message"); box.className = `form-message ${type}`; box.textContent = text; }
-
-async function submitRecord(table, payload) {
-  const response = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, { method: "POST", headers: { ...headers, Prefer: "return=minimal" }, body: JSON.stringify(payload) });
-  if (!response.ok) throw new Error("Submission failed");
-}
-
-function reference(prefix) { return `${prefix}-${crypto.randomUUID().replaceAll("-", "").slice(0, 10).toUpperCase()}`; }
-
-document.querySelector('[data-form="farmer"]').addEventListener("submit", async (event) => {
-  event.preventDefault(); const form = event.currentTarget;
-  const products = [...form.querySelectorAll('input[name="primary_products"]:checked')].map((item) => item.value);
-  if (!form.reportValidity() || products.length === 0) { showMessage(form, "error", "Please complete the required fields and select at least one product."); return; }
-  const data = new FormData(form); const button = form.querySelector("button[type=submit]"); button.disabled = true; button.textContent = "Submitting…";
-  try {
-    const ref = reference("EFA");
-    await submitRecord("eco_farmer_applications", { reference_number: ref, full_name: clean(data.get("full_name")), phone: clean(data.get("phone")), email: clean(data.get("email")), district: clean(data.get("district")), chiefdom: clean(data.get("chiefdom")), community: clean(data.get("community")), farm_size_hectares: numberOrNull(data.get("farm_size_hectares")), experience_years: numberOrNull(data.get("experience_years")), primary_products: products, notes: clean(data.get("notes")) });
-    form.reset(); showMessage(form, "success", `Application received successfully. Keep your reference: ${ref}`); track("farmer_form_submit", { section: "partners" });
-  } catch { showMessage(form, "error", "We could not submit your application right now. Please check your connection and try again."); }
-  finally { button.disabled = false; button.textContent = "Submit farmer application"; }
+document.querySelector('[data-form="market"]').addEventListener("submit",async event=>{event.preventDefault();const form=event.currentTarget;if(!basket.size){showMessage(form,"error","Add at least one product to your basket.");return}if(!form.reportValidity())return;const data=new FormData(form),button=form.querySelector("button[type=submit]");button.disabled=true;button.textContent="Submitting…";
+ try{const ref=reference("EMO"),requested_items=[...basket.values()].map(p=>({product_id:p.id,name:p.name,quantity:p.quantity,unit:p.unit,listed_price:p.public_price,pricing:p.public_price==null?"quotation_required":"listed"}));await submitRecord("eco_supply_requests",{reference_number:ref,organization_name:clean(data.get("organization_name")),contact_name:clean(data.get("contact_name")),phone:clean(data.get("phone")),email:clean(data.get("email")),buyer_segment:clean(data.get("buyer_segment")),delivery_location:clean(data.get("delivery_location")),requested_items,frequency:clean(data.get("frequency")),required_from:clean(data.get("required_from")),notes:clean(data.get("notes"))||"Submitted through Ecofarms Market"});basket.clear();renderBasket();form.reset();showMessage(form,"success",`Order request received. Keep your reference: ${ref}`);track("market_order_submit",{section:"market",target:ref})}
+ catch{showMessage(form,"error","We could not submit your order right now. Please check your connection and try again.")}
+ finally{button.disabled=false;button.textContent="Send order request"}
 });
-
-document.querySelector('[data-form="supply"]').addEventListener("submit", async (event) => {
-  event.preventDefault(); const form = event.currentTarget;
-  if (!form.reportValidity()) return;
-  const data = new FormData(form); const button = form.querySelector("button[type=submit]"); button.disabled = true; button.textContent = "Submitting…";
-  try {
-    const ref = reference("ESR");
-    await submitRecord("eco_supply_requests", { reference_number: ref, organization_name: clean(data.get("organization_name")), contact_name: clean(data.get("contact_name")), phone: clean(data.get("phone")), email: clean(data.get("email")), buyer_segment: clean(data.get("buyer_segment")), delivery_location: clean(data.get("delivery_location")), requested_items: [{ description: clean(data.get("items")) }], frequency: clean(data.get("frequency")), required_from: clean(data.get("required_from")), notes: clean(data.get("notes")) });
-    form.reset(); showMessage(form, "success", `Supply request received. Keep your reference: ${ref}`); track("supply_form_submit", { section: "supply" });
-  } catch { showMessage(form, "error", "We could not submit your request right now. Please check your connection and try again."); }
-  finally { button.disabled = false; button.textContent = "Send supply request"; }
-});
-
-track("page_view", { section: "home" });
-const viewedSections = new Set();
-const analyticsObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting && entry.target.id && !viewedSections.has(entry.target.id)) {
-      viewedSections.add(entry.target.id);
-      track("section_view", { section: entry.target.id });
-      analyticsObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.35 });
-document.querySelectorAll("main section[id]").forEach((section) => analyticsObserver.observe(section));
-document.querySelectorAll("header a, footer a").forEach((link) => link.addEventListener("click", () =>
-  track("navigation_click", { section: "navigation", target: link.textContent.trim() })
-));
-const farmerForm = document.querySelector('[data-form="farmer"]');
-const supplyForm = document.querySelector('[data-form="supply"]');
-farmerForm.addEventListener("focusin", () => track("farmer_form_start", { section: "partners" }), { once: true });
-supplyForm.addEventListener("focusin", () => track("supply_form_start", { section: "supply" }), { once: true });
-
-loadProducts();
+document.querySelector('[data-form="farmer"]').addEventListener("submit",async event=>{event.preventDefault();const form=event.currentTarget,selected=[...form.querySelectorAll('input[name="primary_products"]:checked')].map(item=>item.value);if(!form.reportValidity()||!selected.length){showMessage(form,"error","Please complete the required fields and select at least one product.");return}const data=new FormData(form),button=form.querySelector("button[type=submit]");button.disabled=true;button.textContent="Submitting…";try{const ref=reference("EFA");await submitRecord("eco_farmer_applications",{reference_number:ref,full_name:clean(data.get("full_name")),phone:clean(data.get("phone")),email:clean(data.get("email")),district:clean(data.get("district")),chiefdom:clean(data.get("chiefdom")),community:clean(data.get("community")),farm_size_hectares:numberOrNull(data.get("farm_size_hectares")),experience_years:numberOrNull(data.get("experience_years")),primary_products:selected,notes:clean(data.get("notes"))});form.reset();showMessage(form,"success",`Application received successfully. Keep your reference: ${ref}`);track("farmer_form_submit",{section:"partners"})}catch{showMessage(form,"error","We could not submit your application right now. Please check your connection and try again.")}finally{button.disabled=false;button.textContent="Submit farmer application"}});
+document.querySelector('[data-form="supply"]').addEventListener("submit",async event=>{event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;const data=new FormData(form),button=form.querySelector("button[type=submit]");button.disabled=true;button.textContent="Submitting…";try{const ref=reference("ESR");await submitRecord("eco_supply_requests",{reference_number:ref,organization_name:clean(data.get("organization_name")),contact_name:clean(data.get("contact_name")),phone:clean(data.get("phone")),email:clean(data.get("email")),buyer_segment:clean(data.get("buyer_segment")),delivery_location:clean(data.get("delivery_location")),requested_items:[{description:clean(data.get("items"))}],frequency:clean(data.get("frequency")),required_from:clean(data.get("required_from")),notes:clean(data.get("notes"))});form.reset();showMessage(form,"success",`Supply request received. Keep your reference: ${ref}`);track("supply_form_submit",{section:"supply"})}catch{showMessage(form,"error","We could not submit your request right now. Please check your connection and try again.")}finally{button.disabled=false;button.textContent="Send supply request"}});
+track("page_view",{section:"home"});const viewed=new Set(),analyticsObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&entry.target.id&&!viewed.has(entry.target.id)){viewed.add(entry.target.id);track("section_view",{section:entry.target.id});analyticsObserver.unobserve(entry.target)}}),{threshold:.35});document.querySelectorAll("main section[id]").forEach(section=>analyticsObserver.observe(section));document.querySelectorAll("header a, footer a").forEach(link=>link.addEventListener("click",()=>track("navigation_click",{section:"navigation",target:link.textContent.trim()})));
+document.querySelector('[data-form="farmer"]').addEventListener("focusin",()=>track("farmer_form_start",{section:"partners"}),{once:true});document.querySelector('[data-form="supply"]').addEventListener("focusin",()=>track("supply_form_start",{section:"supply"}),{once:true});
+loadProducts();renderBasket();
