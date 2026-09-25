@@ -9,3 +9,16 @@
 @media(max-width:700px){.market-tools{grid-template-columns:1fr}.cart-row{grid-template-columns:1fr 110px}.cart-row>button{grid-column:1/-1;text-align:left}.product-buy{align-items:flex-start;flex-direction:column}.product-buy .button{width:100%}}
 
 .product-social{display:flex;gap:.75rem;align-items:center;margin-top:.9rem}.product-social a,.product-social button{border:0;background:none;padding:0;color:var(--green);font:600 .75rem "DM Sans",sans-serif;text-decoration:underline;cursor:pointer}.promoted-product{outline:3px solid var(--gold);outline-offset:4px;animation:marketPulse 1.4s ease 2}@keyframes marketPulse{50%{transform:translateY(-5px)}}@media(max-width:700px){.product-social{justify-content:space-between}}
+
+
+/* Farmers Connect product bridge */
+.farmers-connect-section{background:linear-gradient(145deg,#edf3e7,#f8f5e9)}
+.farmers-connect-section .section-heading{max-width:900px}
+.connect-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem}
+.connect-feature-grid article{padding:clamp(1.3rem,2.8vw,2.2rem);border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);box-shadow:0 10px 30px rgba(11,36,23,.04)}
+.connect-feature-grid article span{display:block;font-size:.7rem;letter-spacing:.14em;font-weight:700;color:var(--leaf);margin-bottom:1rem}
+.connect-feature-grid h3{font-size:clamp(1.2rem,2vw,1.6rem);color:var(--forest)}
+.connect-feature-grid p{color:var(--muted);margin-bottom:0}
+.connect-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:2rem}
+.connect-actions p{width:100%;max-width:780px;color:var(--muted);font-size:.85rem;margin:.4rem 0 0}
+@media(max-width:800px){.connect-feature-grid{grid-template-columns:1fr}}
