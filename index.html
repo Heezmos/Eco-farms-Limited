@@ -51,8 +51,8 @@
         <span></span><span></span><span></span><b>Menu</b>
       </button>
       <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation" data-nav>
-        <a href="#about">About</a><a href="#pillars">Our Model</a><a href="#market">Ecofarms Market</a><a href="#farmers-connect">Farmers Connect</a><a href="#partners">Farmers</a><a href="#supply">Buyers</a>
-        <a class="nav-cta" href="#market">Shop the market</a>
+        <a href="#about">About</a><a href="#pillars">Our Model</a><a href="#farmers-connect">Farmers Connect</a><a href="#partners">Farmer Network</a><a href="#supply">Business Buyers</a>
+        <a class="nav-cta" href="#farmers-connect">Farmers Connect</a>
       </nav>
     </header>
 
@@ -62,7 +62,7 @@
           <p class="eyebrow">Integrated agribusiness · Sierra Leone</p>
           <h1>Reliable food supply begins with <em>better connections.</em></h1>
           <p>Ecofarms brings production, partner farmers and market demand into one disciplined agricultural supply network.</p>
-          <div class="hero-actions"><a class="button gold" href="#market">Shop Ecofarms Market</a><a class="button ghost" href="#partners">Join our farmer network</a></div>
+          <div class="hero-actions"><a class="button gold" href="#farmers-connect">Explore Farmers Connect</a><a class="button ghost" href="#about">Discover Ecofarms</a></div>
           <div class="trust-line"><span>Demand-led planning</span><span>Quality standards</span><span>Traceable supply</span></div>
         </div>
         <div class="hero-mark reveal">
@@ -92,41 +92,12 @@
         </div>
       </section>
 
-      <section class="section products market" id="market">
-        <div class="section-heading reveal"><p class="eyebrow">Ecofarms Market</p><h2>Trusted agricultural products, ready for your demand.</h2><p>Browse management-approved products, build a supply basket and send one structured order request to our commercial team.</p></div>
-        <div class="market-tools reveal"><label><span class="sr-only">Search products</span><input type="search" placeholder="Search products…" data-market-search /></label><label><span class="sr-only">Filter category</span><select data-market-category><option value="">All categories</option></select></label><button class="button green cart-button" type="button" data-cart-open>Basket <span data-cart-count>0</span></button></div>
-        <div class="product-grid market-grid" data-products><p class="loading">Loading Ecofarms Market…</p></div>
-        <div class="identity-grid reveal">
-          <div><b>Ecofarms Grown</b><span>Produced directly under Ecofarms management.</span></div>
-          <div><b>Ecofarms Partner</b><span>Supplied through registered partner farmers.</span></div>
-          <div><b>Ecofarms Verified</b><span>Approved third-party supply meeting our requirements.</span></div>
-        </div>
-      </section>
-      <dialog class="market-dialog" data-cart-dialog>
-        <div class="dialog-head"><div><p class="eyebrow">Your supply basket</p><h2>Request an Ecofarms order</h2></div><button type="button" class="dialog-close" data-cart-close aria-label="Close basket">×</button></div>
-        <div class="cart-items" data-cart-items></div>
-        <form class="market-order-form" data-form="market" novalidate>
-          <div class="field-grid">
-            <label>Organization or customer name *<input name="organization_name" required minlength="2" maxlength="160" /></label>
-            <label>Contact person *<input name="contact_name" autocomplete="name" required minlength="2" maxlength="120" /></label>
-            <label>Phone number *<input name="phone" type="tel" autocomplete="tel" required minlength="7" maxlength="30" /></label>
-            <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" /></label>
-            <label>Buyer type *<select name="buyer_segment" required><option value="">Select buyer type</option><option value="hotel_restaurant_caterer">Hotel, restaurant or caterer</option><option value="supermarket_retailer">Supermarket or retailer</option><option value="wholesaler_processor">Wholesaler or processor</option><option value="institution">School, NGO, government or institution</option><option value="household">Household</option><option value="other">Other</option></select></label>
-            <label>Delivery location *<input name="delivery_location" required minlength="2" maxlength="240" /></label>
-            <label>Supply frequency *<select name="frequency" required><option value="one_time">One-time order</option><option value="weekly">Weekly</option><option value="fortnightly">Every two weeks</option><option value="monthly">Monthly</option></select></label>
-            <label>Required from<input name="required_from" type="date" /></label>
-          </div>
-          <label>Additional requirements<textarea name="notes" rows="3" maxlength="2000" placeholder="Quality, packaging or delivery instructions"></textarea></label>
-          <p class="privacy-note">This is an order request, not an automatic payment. Ecofarms will confirm price, availability and delivery before the order becomes binding.</p>
-          <button class="button gold submit" type="submit">Send order request</button><div class="form-message" role="status" aria-live="polite"></div>
-        </form>
-      </dialog>
 
       <section class="section farmers-connect-section" id="farmers-connect" aria-labelledby="farmers-connect-title">
         <div class="section-heading reveal">
           <p class="eyebrow">An Ecofarms digital product</p>
           <h2 id="farmers-connect-title">Farmers Connect. From field to market.</h2>
-          <p>Farmers Connect is the AI-powered agricultural operating system Ecofarms is developing for farms, agribusinesses, cooperatives and agricultural firms. Each organization will manage its own farms, farmers, production, inventory, marketplace, buyers and operations in one secure workspace. Ecofarms Market remains the separate corporate, management-approved catalogue.</p>
+          <p>Farmers Connect is the AI-powered agricultural operating system Ecofarms is developing for farms, agribusinesses, cooperatives and agricultural firms. Each organization will manage its own farms, farmers, production, harvests, marketplace, buyers, orders and operations in one secure workspace. The Ecofarms corporate website is informational; agricultural operations and commercial activity belong inside Farmers Connect.</p>
         </div>
         <div class="connect-feature-grid reveal">
           <article><span>01 / OPERATE</span><h3>Run your agricultural business</h3><p>Manage farms, teams, farmer networks, production cycles, inventory and harvest forecasts within your organization’s workspace.</p></article>
@@ -135,51 +106,13 @@
         </div>
         <div class="connect-actions reveal">
           <a class="button gold" href="https://farmers-connect-ecofarms.henrisonmoseray111.chatgpt.site/" target="_blank" rel="noopener noreferrer" data-farmers-connect-launch>Open Farmers Connect ↗</a>
-          <a class="button green" href="#market">Browse Ecofarms Market</a>
-          <p>Farmers Connect is currently a pilot. Multi-organization access, AI workflows and marketplace transactions are development goals, not features verified as live. The two platforms are not yet synchronized.</p>
+          <p>Farmers Connect is the operational product for agricultural organizations. Its production, marketplace and transaction capabilities are being developed separately from this corporate website.</p>
         </div>
       </section>
 
-      <section class="section partner-section" id="partners">
-        <div class="form-intro reveal"><p class="eyebrow">Partner with Ecofarms</p><h2>Join the Ecofarms Partner Farmer Network.</h2><p>Build a verified commercial record, receive market information and participate in production planning, aggregation and supply opportunities.</p>
-          <ol><li><span>1</span>Submit your application</li><li><span>2</span>Farmer and farm verification</li><li><span>3</span>Tier classification and activation</li></ol>
-        </div>
-        <form class="application-form reveal" data-form="farmer" novalidate>
-          <div class="form-title"><h3>Farmer application</h3><p>Fields marked * are required.</p></div>
-          <div class="field-grid">
-            <label>Full name *<input name="full_name" autocomplete="name" required minlength="2" maxlength="120" /></label>
-            <label>Phone number *<input name="phone" type="tel" autocomplete="tel" required minlength="7" maxlength="30" /></label>
-            <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" /></label>
-            <label>District *<select name="district" required><option value="">Select district</option><option>Bo</option><option>Bombali</option><option>Bonthe</option><option>Falaba</option><option>Kailahun</option><option>Kambia</option><option>Karene</option><option>Kenema</option><option>Koinadugu</option><option>Kono</option><option>Moyamba</option><option>Port Loko</option><option>Pujehun</option><option>Tonkolili</option><option>Western Area Rural</option><option>Western Area Urban</option></select></label>
-            <label>Chiefdom<input name="chiefdom" maxlength="100" /></label><label>Community<input name="community" maxlength="120" /></label>
-            <label>Farm size (hectares)<input name="farm_size_hectares" type="number" min="0" step="0.01" /></label>
-            <label>Years of farming experience<input name="experience_years" type="number" min="0" max="80" /></label>
-          </div>
-          <fieldset><legend>What do you currently produce? *</legend><div class="checks"><label><input type="checkbox" name="primary_products" value="rice" /> Rice</label><label><input type="checkbox" name="primary_products" value="vegetables" /> Vegetables</label><label><input type="checkbox" name="primary_products" value="poultry_eggs" /> Poultry/Eggs</label><label><input type="checkbox" name="primary_products" value="cassava" /> Cassava</label><label><input type="checkbox" name="primary_products" value="maize" /> Maize</label><label><input type="checkbox" name="primary_products" value="other" /> Other</label></div></fieldset>
-          <label>Additional information<textarea name="notes" rows="4" maxlength="3000" placeholder="Tell us about your farm, production and partnership interests."></textarea></label>
-          <p class="privacy-note">Your information is submitted securely and used only to assess your Ecofarms partnership application.</p>
-          <button class="button green submit" type="submit">Submit farmer application</button><div class="form-message" role="status" aria-live="polite"></div>
-        </form>
-      </section>
+      <section class="section partner-section" id="partners"><div class="section-heading reveal"><p class="eyebrow">Partner farmers</p><h2>Building a dependable farmer network.</h2><p>Ecofarms works to organize farmers around production planning, quality standards, harvest visibility and reliable market access. Farmer onboarding and operational activity are handled through Farmers Connect.</p></div></section>
 
-      <section class="section supply-section" id="supply">
-        <div class="section-heading light reveal"><p class="eyebrow">For businesses and institutions</p><h2>Tell us what your operation needs.</h2><p>Request one-time or recurring supply. Our commercial team will review product, volume, quality, frequency and delivery requirements.</p></div>
-        <form class="supply-form reveal" data-form="supply" novalidate>
-          <div class="field-grid">
-            <label>Organization name *<input name="organization_name" required minlength="2" maxlength="160" /></label>
-            <label>Contact person *<input name="contact_name" autocomplete="name" required minlength="2" maxlength="120" /></label>
-            <label>Phone number *<input name="phone" type="tel" autocomplete="tel" required minlength="7" maxlength="30" /></label>
-            <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" /></label>
-            <label>Buyer type *<select name="buyer_segment" required><option value="">Select buyer type</option><option value="hotel_restaurant_caterer">Hotel, restaurant or caterer</option><option value="supermarket_retailer">Supermarket or retailer</option><option value="wholesaler_processor">Wholesaler or processor</option><option value="institution">School, NGO, government or institution</option><option value="household">Household</option><option value="other">Other</option></select></label>
-            <label>Delivery location *<input name="delivery_location" required minlength="2" maxlength="240" /></label>
-            <label>Supply frequency *<select name="frequency" required><option value="one_time">One-time order</option><option value="weekly">Weekly</option><option value="fortnightly">Every two weeks</option><option value="monthly">Monthly</option><option value="custom">Custom schedule</option></select></label>
-            <label>Required from<input name="required_from" type="date" /></label>
-          </div>
-          <label>Products, quantities and quality requirements *<textarea name="items" rows="4" required maxlength="3000" placeholder="Example: 20 trays of eggs weekly, delivered every Monday."></textarea></label>
-          <label>Additional notes<textarea name="notes" rows="3" maxlength="3000"></textarea></label>
-          <button class="button gold submit" type="submit">Send supply request</button><div class="form-message" role="status" aria-live="polite"></div>
-        </form>
-      </section>
+      <section class="section supply-section" id="supply"><div class="section-heading light reveal"><p class="eyebrow">Business buyers</p><h2>Connecting dependable supply with real demand.</h2><p>Ecofarms is building relationships with businesses and institutions that need consistent agricultural supply. Buyer demand, orders, reservations and fulfillment are managed through Farmers Connect rather than this corporate website.</p></div></section>
 
       <section class="section impact">
         <div class="section-heading reveal"><p class="eyebrow">Built to grow responsibly</p><h2>Validate. Standardize. Reinvest. Expand. Scale.</h2></div>
@@ -187,6 +120,6 @@
       </section>
     </main>
 
-    <footer><div class="footer-brand"><img src="assets/ecofarms-logo.webp?v=1" alt="" /><div><strong>Ecofarms Limited</strong><span>Produce. Partner. Connect.</span></div></div><p>An integrated agribusiness strengthening the connection between food production, farmers and markets in Sierra Leone.</p><div><a href="#partners">Farmer application</a><a href="#market">Ecofarms Market</a><a href="#farmers-connect">Farmers Connect</a><a href="#supply">Custom supply request</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Website terms</a><span>Freetown, Sierra Leone</span></div><small>© <span data-year></span> Ecofarms Limited. All rights reserved.</small></footer>
+    <footer><div class="footer-brand"><img src="assets/ecofarms-logo.webp?v=1" alt="" /><div><strong>Ecofarms Limited</strong><span>Produce. Partner. Connect.</span></div></div><p>An integrated agribusiness strengthening the connection between food production, farmers and markets in Sierra Leone.</p><div><a href="#partners">Farmer application</a><a href="#farmers-connect">Farmers Connect</a><a href="#farmers-connect">Farmers Connect</a><a href="#supply">Custom supply request</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Website terms</a><span>Freetown, Sierra Leone</span></div><small>© <span data-year></span> Ecofarms Limited. All rights reserved.</small></footer>
   </body>
 </html>
