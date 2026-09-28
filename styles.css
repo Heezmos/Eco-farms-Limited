@@ -41,3 +41,11 @@
 .public-market .market-card>small{margin-top:.7rem!important;overflow-wrap:anywhere}
 .public-market .market-card>.button{width:calc(100% - 2.5rem)!important;margin:1.25rem!important;box-sizing:border-box}
 @media(max-width:640px){.public-market .market-grid{grid-template-columns:minmax(0,1fr)!important}.public-market .market-card{min-height:0!important}}
+
+/* Definitive marketplace viewport/header fix */
+#marketplace{scroll-margin-top:110px!important}
+#marketplace.public-market{padding-top:7.5rem!important;margin-top:0!important;min-height:auto!important}
+#marketplace .section-heading{position:relative!important;z-index:1!important;margin-top:0!important;padding-top:0!important;transform:none!important;opacity:1!important}
+#marketplace .section-heading .eyebrow{margin-top:0!important}
+#marketplace .market-grid{margin-top:2.5rem!important}
+@media(max-width:900px){#marketplace{scroll-margin-top:86px!important}#marketplace.public-market{padding-top:5.5rem!important}}
