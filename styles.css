@@ -27,3 +27,17 @@
 
 /* Marketplace storefront refinement */
 .public-market{padding-top:5rem;padding-bottom:6rem}.public-market .section-heading{max-width:900px}.public-market .section-heading h2{max-width:760px}.market-grid{grid-template-columns:repeat(3,minmax(260px,1fr));gap:1.5rem;align-items:stretch}.market-card{position:relative;overflow:hidden;min-height:340px;padding:1.6rem;border-radius:22px;border:1px solid rgba(23,62,42,.12);box-shadow:0 14px 40px rgba(23,62,42,.08);transition:transform .2s ease,box-shadow .2s ease}.market-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(23,62,42,.13)}.market-card:before{content:"";display:block;height:110px;margin:-1.6rem -1.6rem 1.2rem;background:linear-gradient(135deg,#173e2a,#315d43)}.market-card-top{position:absolute;top:1rem;left:1rem;right:1rem;color:#fff;z-index:1}.market-badge{display:inline-flex;align-items:center;background:rgba(255,255,255,.92);color:#173e2a;padding:.38rem .65rem;border-radius:999px;font-weight:700}.market-card h3{font-size:1.65rem;line-height:1.1}.market-card p{min-height:2.8em}.market-card strong{font-size:1.08rem}.market-card small{display:block;line-height:1.5}.market-card .button{width:100%;margin-top:auto;padding:.9rem 1rem;border-radius:999px;font-weight:700}.market-empty{min-height:180px;display:grid;place-content:center}@media(max-width:1000px){.market-grid{grid-template-columns:repeat(2,minmax(250px,1fr))}}@media(max-width:640px){.public-market{padding-top:3.5rem}.market-grid{grid-template-columns:1fr}.market-card{min-height:320px}}
+
+/* Marketplace overflow/cutoff fix */
+.public-market{overflow:visible!important}
+.public-market .market-grid{width:100%;max-width:none;overflow:visible!important;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))!important}
+.public-market .market-card{width:100%;max-width:100%;min-width:0;box-sizing:border-box;overflow:hidden!important;padding:0!important;gap:0!important}
+.public-market .market-card:before{display:none!important;content:none!important}
+.public-market .market-card-top{position:static!important;display:flex!important;padding:1rem 1.25rem!important;background:linear-gradient(135deg,#173e2a,#315d43);color:#fff!important}
+.public-market .market-card>h3,.public-market .market-card>p,.public-market .market-card>strong,.public-market .market-card>small{margin-left:1.25rem!important;margin-right:1.25rem!important}
+.public-market .market-card>h3{margin-top:1.25rem!important}
+.public-market .market-card>p{margin-top:.55rem!important}
+.public-market .market-card>strong{margin-top:.8rem!important}
+.public-market .market-card>small{margin-top:.7rem!important;overflow-wrap:anywhere}
+.public-market .market-card>.button{width:calc(100% - 2.5rem)!important;margin:1.25rem!important;box-sizing:border-box}
+@media(max-width:640px){.public-market .market-grid{grid-template-columns:minmax(0,1fr)!important}.public-market .market-card{min-height:0!important}}
