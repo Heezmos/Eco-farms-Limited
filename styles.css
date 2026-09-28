@@ -66,3 +66,25 @@
 .marketplace-shell .market-card>small{margin:12px 20px 0!important;line-height:1.45;overflow-wrap:anywhere}
 .marketplace-shell .market-card>.button{width:auto!important;margin:auto 20px 20px!important;padding:14px 18px;border-radius:999px}
 @media(max-width:700px){.marketplace-shell{padding:110px 20px 70px;scroll-margin-top:72px}.marketplace-shell>.section-heading h2{font-size:clamp(2.1rem,11vw,3.2rem)}.marketplace-shell>.market-grid{grid-template-columns:minmax(0,1fr)!important}.marketplace-shell .market-card{min-height:360px}}
+
+/* Marketplace catalog cards v3 */
+.marketplace-shell>.market-grid{grid-template-columns:repeat(auto-fill,minmax(260px,320px))!important;align-items:start}
+.marketplace-shell .market-card{min-height:0!important;border-radius:16px!important;box-shadow:0 8px 26px rgba(23,62,42,.08)!important}
+.marketplace-shell .market-visual{position:relative;aspect-ratio:4/3;overflow:hidden;background:#e9efe5}
+.marketplace-shell .market-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.marketplace-shell .market-placeholder{height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;box-sizing:border-box;background:linear-gradient(145deg,#244f37,#75966f);color:#fff}
+.marketplace-shell .market-placeholder span{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.marketplace-shell .market-placeholder strong{font-family:"Libre Baskerville",serif;font-size:1.7rem;margin-top:6px}
+.marketplace-shell .market-visual .market-badge{position:absolute;top:12px;left:12px;background:#fff;color:#173e2a;padding:7px 10px;border-radius:999px;font-size:.68rem}
+.marketplace-shell .market-content{display:flex;flex-direction:column;padding:18px}
+.marketplace-shell .market-meta{display:flex;justify-content:space-between;gap:10px;color:#667069;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em}
+.marketplace-shell .market-content h3{margin:12px 0 5px!important;font-size:1.35rem}
+.marketplace-shell .market-content>p{margin:0!important;min-height:0;color:#667069;font-size:.88rem}
+.marketplace-shell .market-price{display:flex;align-items:baseline;gap:6px;margin-top:16px;color:#173e2a}
+.marketplace-shell .market-price strong{font-size:1.15rem}.marketplace-shell .market-price span{font-size:.72rem;color:#667069}
+.marketplace-shell .market-stock{margin-top:5px;font-size:.78rem;font-weight:600;color:#315d43}
+.marketplace-shell .market-content>small{margin:14px 0 0!important;padding-top:12px;border-top:1px solid rgba(23,62,42,.1);color:#667069}
+.marketplace-shell .market-content>.button{width:100%!important;margin:16px 0 0!important}
+.marketplace-shell .market-details{margin-top:14px;padding:14px;border-radius:10px;background:#f5f2e8;font-size:.8rem}
+.marketplace-shell .market-details p{margin:0 0 8px!important;min-height:0!important}.marketplace-shell .market-details p:last-child{margin-bottom:0!important}.marketplace-shell .market-note{color:#667069}
+@media(max-width:700px){.marketplace-shell>.market-grid{grid-template-columns:1fr!important}.marketplace-shell .market-card{max-width:420px}}
