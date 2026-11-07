@@ -36,6 +36,9 @@ jobs:
 
       - name: Build Farmers Connect
         working-directory: farmers-connect
+        env:
+          VITE_SUPABASE_URL: https://dadjxxjqqprzlroltpra.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_vgs_uPYIvyii4I2s87Vcfw_RvRwF3tg
         run: |
           npm install --no-audit --no-fund
           npm run build -- --base=/Eco-farms-Limited/farmers-connect/ --outDir ../_site/farmers-connect
