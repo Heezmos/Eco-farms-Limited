@@ -50,7 +50,7 @@ alter table public.fc_farms enable row level security;
 alter table public.fc_farmers enable row level security;
 alter table public.fc_production_cycles enable row level security;
 alter table public.fc_harvest_forecasts enable row level security;
-create policy fc_org_select_member on public.fc_organizations for select to authenticated using(created_by=(select auth.uid()) or exists(select 1 from public.fc_memberships m where m.organization_id=id and m.user_id=(select auth.uid()) and m.status='active'));
+create policy fc_org_select_member on public.fc_organizations for select to authenticated using(created_by=(select auth.uid()) or exists(select 1 from public.fc_memberships m where m.organization_id=fc_organizations.id and m.user_id=(select auth.uid()) and m.status='active'));
 create policy fc_org_insert_owner on public.fc_organizations for insert to authenticated with check(created_by=(select auth.uid()));
 create policy fc_membership_select_self on public.fc_memberships for select to authenticated using(user_id=(select auth.uid()));
 create policy fc_membership_insert_initial_owner on public.fc_memberships for insert to authenticated with check(user_id=(select auth.uid()) and role='owner' and status='active' and exists(select 1 from public.fc_organizations o where o.id=organization_id and o.created_by=(select auth.uid())));

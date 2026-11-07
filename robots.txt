@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://heezmos.github.io/Eco-farms-Limited/sitemap.xml
+Sitemap: https://ecofarms-limited-hm-os.vercel.app/sitemap.xml
